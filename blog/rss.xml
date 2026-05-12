@@ -455,7 +455,7 @@
 <p><img decoding="async" loading="lazy" alt="Cardano Stake Pool Delegation Explorer dApp" src="https://effectstream.github.io/docs/assets/images/delegate-pool1-354644d9722993f0dca5cc468756244d.png" width="1648" height="1236" class="img_ev3q"></p>
 <p>And this is the terminal output showing EffectStream detecting delegation changes as they happen, with the state machine reacting to each one:</p>
 <p><img decoding="async" loading="lazy" alt="Terminal showing delegation side effects being detected in real-time" src="https://effectstream.github.io/docs/assets/images/delegate-pool2-b4ec722bac53722ebdb8249517f0d5d8.png" width="1537" height="1015" class="img_ev3q"></p>
-<iframe src="https://drive.google.com/file/d/1DvNhISjGyhZW93bcKLKl8akLl9iJfLc3/preview" width="100%" height="480" allow="autoplay"></iframe>
+<iframe src="https://drive.google.com/file/d/1KrFfkgRWf_OKqH6agM6T44NyPS5aIqAc/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-developers-can-build">What developers can build<a href="https://effectstream.github.io/docs/blog/stakepool-delegation#what-developers-can-build" class="hash-link" aria-label="Direct link to What developers can build" title="Direct link to What developers can build" translate="no">​</a></h2>
 <p>With delegation data flowing into the state machine, developers can build game logic that reacts to where players delegate:</p>
 <ul>
