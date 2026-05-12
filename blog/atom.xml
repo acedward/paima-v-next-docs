@@ -474,7 +474,7 @@
 </ul>
 <p>For stake pool delegation, the "by delegation part" filter is the important one. It lets EffectStream detect when any address changes its delegation to or from a monitored pool, without scanning the entire chain.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-pooldelegation-primitive">The PoolDelegation primitive<a href="https://effectstream.github.io/docs/blog/stakepool-delegation#the-pooldelegation-primitive" class="hash-link" aria-label="Direct link to The PoolDelegation primitive" title="Direct link to The PoolDelegation primitive" translate="no">​</a></h2>
-<p>The new <strong>PoolDelegation</strong> primitive is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which adds five Cardano primitives to EffectStream. PoolDelegation reads delegation events from Dolos via UTxORPC and materializes them into PostgreSQL using EffectStream's IVM (Indexed View Materializer).</p>
+<p>The <strong>PoolDelegation</strong> primitive is one of <a href="https://github.com/effectstream/effectstream/tree/v-next-bun/packages/node-sdk/sm/primitives/src" target="_blank" rel="noopener noreferrer" class="">five Cardano primitives</a> in EffectStream. It reads delegation events from Dolos via UTxORPC and materializes them into PostgreSQL using EffectStream's IVM (Indexed View Materializer). See the <a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a> for the full reference.</p>
 <p>The primitive tracks:</p>
 <ul>
 <li class=""><strong>Stake registrations</strong> - new stake addresses entering the system</li>
@@ -496,11 +496,13 @@
 <li class="">Delegators of partner pools get free transaction batching via the <code>BATCHER_CARDANO_ENABLED_POOLS</code> config (the SPO covers the cost)</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="end-to-end-testing">End-to-end testing<a href="https://effectstream.github.io/docs/blog/stakepool-delegation#end-to-end-testing" class="hash-link" aria-label="Direct link to End-to-end testing" title="Direct link to End-to-end testing" translate="no">​</a></h2>
-<p>The PoolDelegation primitive is covered by EffectStream's E2E test suite, part of 21 tests in PR #673 that verify the full Cardano primitive lifecycle. The delegation tests cover stake address registration, initial delegation to a pool, delegation change detection, and state verification in PostgreSQL materialized views. All tests run against a local Dolos instance with YACI DevKit, so CI runs fast with no mainnet or testnet dependencies.</p>
+<p>The PoolDelegation primitive is covered by EffectStream's <a href="https://github.com/effectstream/effectstream/tree/v-next-bun/e2e" target="_blank" rel="noopener noreferrer" class="">E2E test suite</a>, which verifies the full Cardano primitive lifecycle. The delegation tests cover stake address registration, initial delegation to a pool, delegation change detection, and state verification in PostgreSQL materialized views. All tests run against a local Dolos instance with YACI DevKit, so CI runs fast with no mainnet or testnet dependencies.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-bigger-picture">The bigger picture<a href="https://effectstream.github.io/docs/blog/stakepool-delegation#the-bigger-picture" class="hash-link" aria-label="Direct link to The bigger picture" title="Direct link to The bigger picture" translate="no">​</a></h2>
 <p>Stake pool delegation becomes a game mechanic. SPOs offer in-game benefits, players choose pools based on gameplay advantages, and a new economic layer sits on top of Cardano's existing delegation system. Delegation goes from a passive yield-earning activity to an active strategic decision: you delegate to a pool not just for staking rewards, but for the games and apps that pool supports.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - PoolDelegation primitive implementation</li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun/packages/node-sdk/sm/primitives/src/cardano-pool-delegation" target="_blank" rel="noopener noreferrer" class="">PoolDelegation primitive source</a> - implementation</li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun/templates/cardano-delegation" target="_blank" rel="noopener noreferrer" class="">Cardano delegation template</a> - starter project</li>
+<li class=""><a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a> - full reference for all five Cardano primitives</li>
 <li class=""><a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch Module</a> - streaming transaction protocol</li>
 <li class=""><a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> - lightweight Cardano node</li>
 </ul>]]></content>
@@ -539,7 +541,7 @@
 <p><img decoding="async" loading="lazy" alt="AI NPC response: evaluating the player&amp;#39;s answer and awarding tokens" src="https://effectstream.github.io/docs/assets/images/taiko3-f01182c843a4e8df7bf7060f3fbfd44c.png" width="2167" height="1294" class="img_ev3q"></p>
 <p>The AI doesn't just give a score; it explains its reasoning. Players can see why their answer earned or lost tokens, which creates an engaging feedback loop that feels more like a conversation than a multiple-choice quiz.</p>
 <ul>
-<li class=""><a href="https://taiko-demo.paimastudios.com/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+<li class=""><a href="https://tokenquest.zkdojo.com/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
 <li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/pull/78" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-matters-for-on-chain-games">Why this matters for on-chain games<a href="https://effectstream.github.io/docs/blog/user-experience-integrations#why-this-matters-for-on-chain-games" class="hash-link" aria-label="Direct link to Why this matters for on-chain games" title="Direct link to Why this matters for on-chain games" translate="no">​</a></h2>
