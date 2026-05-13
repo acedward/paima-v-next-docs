@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>EffectStream Blog</title>
+        <link>https://effectstream.github.io/docs/ja/blog</link>
+        <description>EffectStream Blog</description>
+        <lastBuildDate>Tue, 28 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>ja</language>
+        <item>
+            <title><![CDATA[An Open Achievement Standard for On-Chain Games]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/achievement-system</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/achievement-system</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Steam has achievements. Xbox has Gamerscore. PlayStation has Trophies. But on-chain games? No standard way to track player accomplishments across games. We built PRC-1, an open standard that any EffectStream game can implement, plus a portal where players see all their achievements in one place.]]></description>
+            <content:encoded><![CDATA[<p>Steam has achievements. Xbox has Gamerscore. PlayStation has Trophies. But on-chain games? No standard way to track player accomplishments across games. We built PRC-1, an open standard that any EffectStream game can implement, plus a portal where players see all their achievements in one place.</p>
+<p><img decoding="async" loading="lazy" alt="Open achievement standard application overview" src="https://effectstream.github.io/docs/ja/assets/images/standards-8f461631c4a8fea2c2cde92a70a56a9e.png" width="3118" height="1770" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="prc-1-the-achievement-standard">PRC-1: the achievement standard<a href="https://effectstream.github.io/docs/ja/blog/achievement-system#prc-1-the-achievement-standard" class="hash-link" aria-label="PRC-1: the achievement standard への直接リンク" title="PRC-1: the achievement standard への直接リンク" translate="no">​</a></h2>
+<p>We created PRC-1 (Paima Request for Comment), a community standard similar to <a href="https://cips.cardano.org/" target="_blank" rel="noopener noreferrer" class="">CIPs</a> for Cardano or <a href="https://eips.ethereum.org/erc" target="_blank" rel="noopener noreferrer" class="">ERCs</a> for Ethereum, but for the EffectStream game ecosystem. PRC-1 defines how games register, track, and expose achievements through a standard HTTP API.</p>
+<p>The spec is published at <a href="https://github.com/effectstream/midnight-game-api-spec" target="_blank" rel="noopener noreferrer" class="">effectstream/midnight-game-api-spec</a>.</p>
+<p>A game implementing PRC-1 exposes two endpoints:</p>
+<ul>
+<li class=""><code>GET /achievements/public/list</code> returns all achievements defined by the game (name, description, display metadata)</li>
+<li class=""><code>GET /achievements/wallet/:wallet</code> returns which achievements a specific player has earned, with timestamps and completion data</li>
+</ul>
+<p>Any game that implements these endpoints is automatically discoverable by achievement portals, leaderboard aggregators, and third-party tools. The standard is intentionally minimal: it defines the interface, not the implementation. Games track achievements however they want internally; they just expose results through these endpoints.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="prc-6-midnight-dapp-integration-extension">PRC-6: Midnight dApp integration extension<a href="https://effectstream.github.io/docs/ja/blog/achievement-system#prc-6-midnight-dapp-integration-extension" class="hash-link" aria-label="PRC-6: Midnight dApp integration extension への直接リンク" title="PRC-6: Midnight dApp integration extension への直接リンク" translate="no">​</a></h2>
+<p>For games running on the <a href="https://midnight.fun/games" target="_blank" rel="noopener noreferrer" class="">midnight.fun</a> portal, we extended PRC-1 with PRC-6 (the Midnight dApp Integration Interface). PRC-6 adds:</p>
+<ul>
+<li class=""><strong>Channels</strong> for categorizing content within a game (modes, seasons, maps)</li>
+<li class=""><strong>Leaderboards</strong> with ranked player standings per channel</li>
+<li class=""><strong>Metrics</strong> for game-level statistics (total players, active sessions, transaction volume)</li>
+<li class=""><strong>Identity resolution</strong> to map session wallets to main wallets via delegation, so achievements earned through auto-sign sessions get correctly attributed to the player's primary identity</li>
+</ul>
+<p>PRC-6 is what powers the rich game cards on midnight.fun. Each game tile shows live player counts, leaderboard positions, and achievement progress, all pulled from the standard API.</p>
+<p>The full PRC-6 spec lives in the same repository: <a href="https://github.com/effectstream/midnight-game-api-spec" target="_blank" rel="noopener noreferrer" class="">effectstream/midnight-game-api-spec</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="live-implementation-three-games-on-midnightfun">Live implementation: three games on midnight.fun<a href="https://effectstream.github.io/docs/ja/blog/achievement-system#live-implementation-three-games-on-midnightfun" class="hash-link" aria-label="Live implementation: three games on midnight.fun への直接リンク" title="Live implementation: three games on midnight.fun への直接リンク" translate="no">​</a></h2>
+<p>PRC-1 and PRC-6 are implemented in three live games on the midnight.fun portal:</p>
+<ul>
+<li class=""><a href="https://blockkart.paimastudios.com/" target="_blank" rel="noopener noreferrer" class=""><strong>Block Kart Legends</strong></a> - racing achievements (lap times, win streaks, distance milestones)</li>
+<li class=""><a href="https://kachina.midnight.fun/" target="_blank" rel="noopener noreferrer" class=""><strong>Kachina Kolosseum</strong></a> - PvP combat achievements (victories, combos, rank progression)</li>
+<li class=""><a href="https://safesolver.midnight.fun/" target="_blank" rel="noopener noreferrer" class=""><strong>Safe Solver</strong></a> - puzzle achievements (completion speed, streak bonuses, difficulty tiers)</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="midnight.fun games portal showing Block Kart, Kachina, and Safe Solver with achievements and leaderboards" src="https://effectstream.github.io/docs/ja/assets/images/midnightfun-cad04b67e8b36607db375ecb6b04f988.png" width="1551" height="1669" class="img_ev3q"></p>
+<p>The screenshot shows the midnight.fun portal pulling data from all three games. Each game card displays live achievement counts and leaderboard positions, sourced from the PRC-1 and PRC-6 APIs. There's no centralized database here; the data lives in each game's node, and the portal queries it on the fly.</p>
+<iframe src="https://drive.google.com/file/d/1SSpY_nFAIm95b7v4LSEDhSywYgAkx0nK/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works-under-the-hood">How it works under the hood<a href="https://effectstream.github.io/docs/ja/blog/achievement-system#how-it-works-under-the-hood" class="hash-link" aria-label="How it works under the hood への直接リンク" title="How it works under the hood への直接リンク" translate="no">​</a></h2>
+<p>When a player connects their wallet to midnight.fun, the portal queries each game's PRC-1 endpoint to fetch that player's achievements. Because the standard uses wallet addresses as the primary identifier, achievements are cross-game and cross-platform by default: any portal or app can query any PRC-1 game.</p>
+<p>For games using auto-sign (session key delegation), PRC-6's identity resolution makes sure achievements don't get "lost" on temporary session wallets. The delegation chain maps session keys back to the player's main wallet, so everything gets attributed correctly no matter which signing method was used.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="an-open-ecosystem">An open ecosystem<a href="https://effectstream.github.io/docs/ja/blog/achievement-system#an-open-ecosystem" class="hash-link" aria-label="An open ecosystem への直接リンク" title="An open ecosystem への直接リンク" translate="no">​</a></h2>
+<p>Unlike platform-locked achievement systems (Steam, Xbox, PlayStation), PRC-1 achievements follow your wallet, not your platform account. Any app can aggregate achievements from any PRC-1 game. There's no central authority controlling the registry. And PRC-6 shows how you can extend the base standard for specific platforms without breaking compatibility.</p>
+<p>The <a href="https://github.com/effectstream/effectstream" target="_blank" rel="noopener noreferrer" class="">achievement system code is built into EffectStream</a>. Any new game built with the framework gets PRC-1 support out of the box: define your achievements as data, and the framework handles tracking and the API. Every new game that adopts the standard makes the whole ecosystem richer.</p>]]></content:encoded>
+            <category>achievements</category>
+            <category>standards</category>
+            <category>cross-game</category>
+            <category>midnight</category>
+            <category>prc</category>
+        </item>
+        <item>
+            <title><![CDATA[Auto-Sign: Eliminating Wallet Pop-ups for Real-Time Applications]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/auto-sign</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/auto-sign</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Every blockchain interaction that requires a wallet signature creates friction. In a turn-based game, you might tolerate one pop-up per move. But in a real-time game, you need dozens of signatures per minute, and each pop-up breaks the flow completely. Auto-sign fixes this by delegating non-financial signing to a session key: your wallet approves once, then the app signs on your behalf for the rest of the session.]]></description>
+            <content:encoded><![CDATA[<p>Every blockchain interaction that requires a wallet signature creates friction. In a turn-based game, you might tolerate one pop-up per move. But in a real-time game, you need dozens of signatures per minute, and each pop-up breaks the flow completely. Auto-sign fixes this by delegating non-financial signing to a session key: your wallet approves once, then the app signs on your behalf for the rest of the session.</p>
+<p><img decoding="async" loading="lazy" alt="On-chain chess game requiring wallet signature to play" src="https://effectstream.github.io/docs/ja/assets/images/signature-af970b47c9402e98bda0d200130de705.png" width="2018" height="1758" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-problem-with-wallet-pop-ups">The problem with wallet pop-ups<a href="https://effectstream.github.io/docs/ja/blog/auto-sign#the-problem-with-wallet-pop-ups" class="hash-link" aria-label="The problem with wallet pop-ups への直接リンク" title="The problem with wallet pop-ups への直接リンク" translate="no">​</a></h2>
+<p>Blockchain games need cryptographic signatures to prove that a player authorized each action. Without auto-sign, every game move triggers a wallet confirmation dialog ("Sign this transaction?"). The result is an experience that feels nothing like a game and everything like filling out forms. Real-time gameplay is basically impossible under these conditions.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-auto-sign-works">How auto-sign works<a href="https://effectstream.github.io/docs/ja/blog/auto-sign#how-auto-sign-works" class="hash-link" aria-label="How auto-sign works への直接リンク" title="How auto-sign works への直接リンク" translate="no">​</a></h2>
+<p>The core insight is separating two types of blockchain interactions:</p>
+<ul>
+<li class=""><strong>Financial transactions</strong> (asset transfers, token minting, contract calls with value) always require explicit wallet approval</li>
+<li class=""><strong>Non-financial data submissions</strong> (game moves, messages, state updates) can be safely delegated to a session key</li>
+</ul>
+<p>When a player starts a session, their wallet generates a temporary key pair and signs a delegation certificate. This certificate authorizes the session key to submit non-financial data on the player's behalf. The session key is scoped (can only submit game data, never move funds), time-bounded (expires when the session ends), and revocable (the player can cancel delegation at any time).</p>
+<p>This preserves the security guarantees players expect: nobody can move their assets without explicit approval. It just removes the friction that makes real-time apps unusable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="implementation-in-effectstreamwallets">Implementation in @effectstream/wallets<a href="https://effectstream.github.io/docs/ja/blog/auto-sign#implementation-in-effectstreamwallets" class="hash-link" aria-label="Implementation in @effectstream/wallets への直接リンク" title="Implementation in @effectstream/wallets への直接リンク" translate="no">​</a></h2>
+<p>Auto-sign lives in the <a href="https://www.npmjs.com/package/@effectstream/wallets" target="_blank" rel="noopener noreferrer" class=""><code>@effectstream/wallets</code></a> package, which provides multi-chain wallet support for EffectStream applications. The package handles the full delegation lifecycle: key generation, certificate signing, session management, and automatic signing of non-financial transactions.</p>
+<p>The wallet layer supports multiple chains (EVM via injected providers and Ethers, Cardano, Midnight, Polkadot, Algorand, and Mina), and auto-sign works across all of them through a unified API. Developers don't need chain-specific signing logic; the framework handles the differences.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="live-on-midnightfun">Live on midnight.fun<a href="https://effectstream.github.io/docs/ja/blog/auto-sign#live-on-midnightfun" class="hash-link" aria-label="Live on midnight.fun への直接リンク" title="Live on midnight.fun への直接リンク" translate="no">​</a></h2>
+<p>Auto-sign is live and in production on <a href="https://midnight.fun/games" target="_blank" rel="noopener noreferrer" class="">midnight.fun</a>, powering three games:</p>
+<ul>
+<li class=""><a href="https://safesolver.midnight.fun/" target="_blank" rel="noopener noreferrer" class=""><strong>Safe Solver</strong></a> - a puzzle game where auto-sign lets you submit moves rapidly</li>
+<li class=""><a href="https://kachina.midnight.fun/" target="_blank" rel="noopener noreferrer" class=""><strong>Kachina Kolosseum</strong></a> - PvP combat where timing matters and pop-ups would ruin the experience</li>
+<li class=""><a href="https://blockkart.paimastudios.com/" target="_blank" rel="noopener noreferrer" class=""><strong>Block Kart Legends</strong></a> - racing where dozens of state updates happen per session</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="midnight.fun games portal showing Safe Solver, Kachina, and Block Kart with achievements and leaderboards" src="https://effectstream.github.io/docs/ja/assets/images/midnightfun-cad04b67e8b36607db375ecb6b04f988.png" width="1551" height="1669" class="img_ev3q"></p>
+<p>The difference is immediately noticeable. Players approve wallet access once when connecting, then play freely. A typical Safe Solver session generates 20-30 signatures, all handled by the session key in the background.</p>
+<iframe src="https://drive.google.com/file/d/1KhkfE4dM5dI3Wo0P3Ij8V3rOTLdHaGX1/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="before-and-after">Before and after<a href="https://effectstream.github.io/docs/ja/blog/auto-sign#before-and-after" class="hash-link" aria-label="Before and after への直接リンク" title="Before and after への直接リンク" translate="no">​</a></h2>
+<p><strong>Without auto-sign</strong>: Connect wallet → Start game → Pop-up → Approve → Make move → Pop-up → Approve → Make move → Pop-up → Approve → ... (player gives up after 3 moves)</p>
+<p><strong>With auto-sign</strong>: Connect wallet → Approve delegation → Play freely for the entire session → Done</p>
+<p>The gameplay goes from "blockchain app with constant interruptions" to "normal game that happens to be on-chain." And it's not just games: chat apps, collaborative tools, IoT dashboards, anything that needs rapid interaction benefits from session key delegation. The security model (limited scope, time-bounded, revocable) applies to all of them.</p>]]></content:encoded>
+            <category>wallets</category>
+            <category>ux</category>
+            <category>auto-sign</category>
+            <category>midnight</category>
+        </item>
+        <item>
+            <title><![CDATA[Data Availability with Celestia: High-Throughput On-Chain Applications]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/celestia-data-availability</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/celestia-data-availability</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[On-chain apps that handle lots of data (games with frequent moves, social feeds, IoT streams) hit a wall: putting everything on the settlement layer is slow and expensive. Data Availability (DA) layers solve this by providing cheap, high-throughput data posting while settlement stays on Cardano or EVM. EffectStream now supports Celestia as a first-class data availability layer.]]></description>
+            <content:encoded><![CDATA[<p>On-chain apps that handle lots of data (games with frequent moves, social feeds, IoT streams) hit a wall: putting everything on the settlement layer is slow and expensive. Data Availability (DA) layers solve this by providing cheap, high-throughput data posting while settlement stays on Cardano or EVM. EffectStream now supports Celestia as a first-class data availability layer.</p>
+<p><img decoding="async" loading="lazy" alt="Celestia DA application overview" src="https://effectstream.github.io/docs/ja/assets/images/da-main-a8cc774df6bb793152d711a7684d195d.png" width="1172" height="880" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-a-data-availability-layer">Why a data availability layer?<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#why-a-data-availability-layer" class="hash-link" aria-label="Why a data availability layer? への直接リンク" title="Why a data availability layer? への直接リンク" translate="no">​</a></h2>
+<p>Every EffectStream application needs to post user actions somewhere persistent and verifiable. For low-frequency applications, the settlement chain (Cardano, EVM) works fine. But when your application generates hundreds or thousands of actions per minute (game moves, chat messages, sensor readings), posting each one as a settlement-layer transaction gets expensive fast.</p>
+<p>A DA layer like <a href="https://celestia.org/" target="_blank" rel="noopener noreferrer" class="">Celestia</a> provides an alternative: post high-throughput data cheaply to the DA layer, while settlement (asset transfers, contract state changes) stays on the main chain. EffectStream's state machine processes events from both layers without the developer having to think about it.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="celestia-integration-architecture">Celestia integration architecture<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#celestia-integration-architecture" class="hash-link" aria-label="Celestia integration architecture への直接リンク" title="Celestia integration architecture への直接リンク" translate="no">​</a></h2>
+<p>The Celestia integration adds a new data path to EffectStream's batcher system. The batcher aggregates individual user submissions into batches and posts them to Celestia for data availability, while settlement transactions go to the configured settlement chain.</p>
+<p>The integration is implemented in <a href="https://github.com/effectstream/effectstream/pull/680" target="_blank" rel="noopener noreferrer" class="">PR #680</a> ("Zswap DA Demo"), which includes:</p>
+<ul>
+<li class=""><strong>Batcher</strong> that aggregates and posts batches to Celestia</li>
+<li class=""><strong>Database</strong> tracking submitted batches, token states, and offer lifecycle</li>
+<li class=""><strong>Frontend</strong> demo UI for interacting with the DA-backed application</li>
+<li class=""><strong>E2E tests</strong> verifying the full pipeline from user action to Celestia submission to state machine processing</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works">How it works<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#how-it-works" class="hash-link" aria-label="How it works への直接リンク" title="How it works への直接リンク" translate="no">​</a></h2>
+<p>The batch processor submits data to Celestia and tracks each submission:</p>
+<p><img decoding="async" loading="lazy" alt="Celestia batch processor logs showing successful submissions" src="https://effectstream.github.io/docs/ja/assets/images/celestia-1-902f1ceb6b17b5f8182e0ea0899f0767.png" width="1618" height="626" class="img_ev3q"></p>
+<p>The backend database tracks the complete state (tokens, offers, batch references):</p>
+<p><img decoding="async" loading="lazy" alt="Database tables tracking tokens and offers posted via Celestia DA" src="https://effectstream.github.io/docs/ja/assets/images/celestia-2-b378249965e491b4c5ab620168880208.png" width="1678" height="564" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Celestia integration: batch submission tracking with block heights" src="https://effectstream.github.io/docs/ja/assets/images/celestia-3-c4c179ea3b970588ccd325aeb450277b.png" width="2170" height="636" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Celestia integration: offer lifecycle and settlement state" src="https://effectstream.github.io/docs/ja/assets/images/celestia-4-41b8087a8ec9ff215624a52ce31b5261.png" width="1742" height="550" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Celestia integration: complete DA pipeline monitoring" src="https://effectstream.github.io/docs/ja/assets/images/celestia-5-bf30ff80ab70947234fc6babf9b9d2a2.png" width="2042" height="644" class="img_ev3q"></p>
+<iframe src="https://drive.google.com/file/d/1vqybh83YG5hR7eeDNlQVNpxSWQrWXqtG/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="parallel-funnel-architecture">Parallel funnel architecture<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#parallel-funnel-architecture" class="hash-link" aria-label="Parallel funnel architecture への直接リンク" title="Parallel funnel architecture への直接リンク" translate="no">​</a></h2>
+<p>EffectStream uses a "funnel" abstraction to read data from multiple blockchains through a unified interface. The Celestia funnel runs in parallel with other chain funnels: Celestia blocks arrive independently from the settlement chain, so the funnel ingests them concurrently. No blocking, no waiting for one chain to catch up to another.</p>
+<p>This matters for multi-chain apps. In a game that settles on Cardano but posts moves to Celestia, you don't want Cardano's block time to bottleneck your data layer. Both chains process at their native speed, and the state machine receives events from each as they arrive.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="when-to-use-a-da-layer">When to use a DA layer<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#when-to-use-a-da-layer" class="hash-link" aria-label="When to use a DA layer への直接リンク" title="When to use a DA layer への直接リンク" translate="no">​</a></h2>
+<p>A DA layer makes sense when:</p>
+<ul>
+<li class=""><strong>High throughput</strong>: your app generates more data than the settlement layer can handle economically</li>
+<li class=""><strong>Low-value actions</strong>: individual actions don't need settlement-layer security (a game move isn't a financial transaction)</li>
+<li class=""><strong>Real-time requirements</strong>: you need sub-second data posting, not the settlement chain's block time</li>
+</ul>
+<p>We learned this the hard way building Tarochi (an earlier EffectStream game): using EVM as the DA layer caused sync time issues as the chain of events grew. Moving high-frequency data to a purpose-built DA layer keeps the settlement chain lean, handling only the transactions that actually need its security.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hybrid-dapp-pattern">Hybrid dApp pattern<a href="https://effectstream.github.io/docs/ja/blog/celestia-data-availability#hybrid-dapp-pattern" class="hash-link" aria-label="Hybrid dApp pattern への直接リンク" title="Hybrid dApp pattern への直接リンク" translate="no">​</a></h2>
+<p>With Celestia support, developers can build hybrid applications:</p>
+<table><thead><tr><th>Data type</th><th>Layer</th><th>Why</th></tr></thead><tbody><tr><td>Game moves, chat messages, state updates</td><td>Celestia DA</td><td>Cheap, fast, high-throughput</td></tr><tr><td>Asset transfers, minting, contract calls</td><td>Settlement chain (Cardano/EVM)</td><td>Full security guarantees</td></tr></tbody></table>
+<p>The developer configures which data goes where, and the framework handles routing, batching, and event delivery.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/effectstream/pull/680" target="_blank" rel="noopener noreferrer" class="">Celestia integration PR #680</a></li>
+<li class=""><a href="https://celestia.org/developer-portal/" target="_blank" rel="noopener noreferrer" class="">Celestia documentation</a></li>
+</ul>]]></content:encoded>
+            <category>celestia</category>
+            <category>data-availability</category>
+            <category>cross-chain</category>
+            <category>scalability</category>
+        </item>
+        <item>
+            <title><![CDATA[Engine Integrations: From Local Development to Mobile]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/engine-integrations</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/engine-integrations</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[EffectStream is designed to integrate with any game engine or platform. This article covers four distinct integrations, each showing a different technology combination: modern multi-chain local development tooling, a traditional game engine, social platform frames, and a mobile app.]]></description>
+            <content:encoded><![CDATA[<p>EffectStream is designed to integrate with any game engine or platform. This article covers four distinct integrations, each showing a different technology combination: modern multi-chain local development tooling, a traditional game engine, social platform frames, and a mobile app.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evm-cardano-local-development-environment">EVM-Cardano local development environment<a href="https://effectstream.github.io/docs/ja/blog/engine-integrations#evm-cardano-local-development-environment" class="hash-link" aria-label="EVM-Cardano local development environment への直接リンク" title="EVM-Cardano local development environment への直接リンク" translate="no">​</a></h2>
+<p>One of the biggest friction points for multi-chain developers is setting up a local dev environment. Syncing a Cardano indexer like Carp can take days on testnet and even longer on mainnet, which makes rapid iteration pretty much impossible. We built a template that replaces this entire workflow with an instant localhost setup.</p>
+<p>The EVM-Cardano template, included in <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, combines:</p>
+<ul>
+<li class=""><a href="https://hardhat.org/" target="_blank" rel="noopener noreferrer" class=""><strong>Hardhat v3</strong></a> for EVM smart contract development and a local EVM chain</li>
+<li class=""><a href="https://github.com/bloxbean/yaci-devkit" target="_blank" rel="noopener noreferrer" class=""><strong>YACI DevKit</strong></a> for a local Cardano devnet</li>
+<li class=""><a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class=""><strong>Dolos</strong></a> with UTxORPC for Cardano indexing via gRPC</li>
+</ul>
+<p>The result: spin up a full multi-chain dev environment (EVM + Cardano) in minutes, not days.</p>
+<p><img decoding="async" loading="lazy" alt="Local development orchestrator showing Hardhat, YACI DevKit, and Dolos running together" src="https://effectstream.github.io/docs/ja/assets/images/evm-cardano-1-d5f432abcc5a588336a2998055ea121e.png" width="930" height="465" class="img_ev3q"></p>
+<p>The template includes an explorer UI for interacting with the local environment. You can mint NFTs on EVM, send ADA on Cardano, and see cross-chain events in a unified feed:</p>
+<p><img decoding="async" loading="lazy" alt="EVM-Cardano Explorer: mint NFTs, send ADA, cross-chain event feed" src="https://effectstream.github.io/docs/ja/assets/images/evm-cardano-2-913c1a1618878d4fd8d5855c975e257a.png" width="883" height="645" class="img_ev3q"></p>
+<p>This is a complete local dev environment for building cross-chain applications. Write smart contracts on both chains, test interactions between them, iterate fast. No testnet, no waiting for chain sync.</p>
+<iframe src="https://drive.google.com/file/d/1dmXshwpqeXi9sez5ekfqfrlXBdjVVABW/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="game-maker-integration">Game Maker integration<a href="https://effectstream.github.io/docs/ja/blog/engine-integrations#game-maker-integration" class="hash-link" aria-label="Game Maker integration への直接リンク" title="Game Maker integration への直接リンク" translate="no">​</a></h2>
+<p>Not every on-chain game needs to be built from scratch. We created a template that integrates EffectStream with <a href="https://gamemaker.io/" target="_blank" rel="noopener noreferrer" class="">Game Maker</a>, one of the most popular 2D game engines. Game designers use familiar visual tools for gameplay while EffectStream handles the blockchain backend: on-chain state, wallet interactions, and multi-chain settlement.</p>
+<p>The point here is that EffectStream isn't limited to web-based games. Any engine that can make HTTP calls can talk to an EffectStream backend, and Game Maker's event-driven architecture maps naturally to EffectStream's state machine model.</p>
+<iframe src="https://drive.google.com/file/d/1NhXGPajMx79w-odUkY8vzbhfGt2BZPg9/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="farcaster-frame-integration">Farcaster Frame integration<a href="https://effectstream.github.io/docs/ja/blog/engine-integrations#farcaster-frame-integration" class="hash-link" aria-label="Farcaster Frame integration への直接リンク" title="Farcaster Frame integration への直接リンク" translate="no">​</a></h2>
+<p><a href="https://docs.farcaster.xyz/developers/frames/" target="_blank" rel="noopener noreferrer" class="">Farcaster Frames</a> are mini-applications that run directly inside Farcaster's social feed. We built a template that turns an EffectStream game into a Frame, playable without leaving the feed. No app install required.</p>
+<p>This is a completely different distribution model. Instead of "download our app and connect your wallet," it's "play this game right here in your feed." Every share is a playable instance. The social feed becomes the game platform.</p>
+<ul>
+<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/tree/main/farcaster-frame" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+</ul>
+<p>The integration handles the constraints of the Frame environment (limited UI real estate, server-side rendering requirements, Farcaster's auth model) while keeping full EffectStream backend functionality.</p>
+<iframe src="https://drive.google.com/file/d/1XFpNegn8fcYIKAgp999I8i4FwGkB7JdJ/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mobile-with-gps">Mobile with GPS<a href="https://effectstream.github.io/docs/ja/blog/engine-integrations#mobile-with-gps" class="hash-link" aria-label="Mobile with GPS への直接リンク" title="Mobile with GPS への直接リンク" translate="no">​</a></h2>
+<p>The most ambitious integration: a game template combining GPS location data for iOS and Android. Location-based gameplay where the assets you find, collect, and trade are real on-chain tokens.</p>
+<p>The mobile app communicates with an EffectStream backend that manages on-chain state, while the mobile layer renders game objects at GPS-determined positions. It shows that EffectStream works well beyond the browser.</p>
+<ul>
+<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/pull/85" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/16IH6do2cyxigKaxL996TtGqMFwHZR3Xs/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-common-thread">The common thread<a href="https://effectstream.github.io/docs/ja/blog/engine-integrations#the-common-thread" class="hash-link" aria-label="The common thread への直接リンク" title="The common thread への直接リンク" translate="no">​</a></h2>
+<table><thead><tr><th>Integration</th><th>Platform</th><th>What's new</th></tr></thead><tbody><tr><td>EVM-Cardano</td><td>Local dev</td><td>Instant multi-chain dev environment, replacing days-long Carp sync</td></tr><tr><td>Game Maker</td><td>Desktop engine</td><td>Traditional game engine + blockchain backend</td></tr><tr><td>Farcaster Frame</td><td>Social feed</td><td>Play on-chain games without leaving the social platform</td></tr><tr><td>Mobile GPS</td><td>iOS/Android</td><td>Location-based on-chain gameplay</td></tr></tbody></table>
+<p>All templates are open-source in the <a href="https://github.com/PaimaStudios/paima-game-templates" target="_blank" rel="noopener noreferrer" class="">game templates repository</a>. The EVM-Cardano template with its Dolos-based local development stack is probably the most impactful: it removes the biggest barrier to Cardano development by getting rid of the sync time that's historically made local testing impractical.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - EVM-Cardano template with Dolos + YACI DevKit</li>
+</ul>]]></content:encoded>
+            <category>game-engines</category>
+            <category>developer-tools</category>
+            <category>mobile</category>
+            <category>farcaster</category>
+            <category>evm</category>
+            <category>cardano</category>
+        </item>
+        <item>
+            <title><![CDATA[Game Template Library: On-Chain Game Patterns for Every Chain]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/game-templates</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/game-templates</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[The best way to learn a framework is to see it in action. We've built five game templates, each one showing a different chain integration, cryptographic technique, or architectural pattern. They're all open-source, playable live, and ready to fork.]]></description>
+            <content:encoded><![CDATA[<p>The best way to learn a framework is to see it in action. We've built five game templates, each one showing a different chain integration, cryptographic technique, or architectural pattern. They're all open-source, playable live, and ready to fork.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="go-fish-zk-mental-poker">Go Fish: ZK Mental Poker<a href="https://effectstream.github.io/docs/ja/blog/game-templates#go-fish-zk-mental-poker" class="hash-link" aria-label="Go Fish: ZK Mental Poker への直接リンク" title="Go Fish: ZK Mental Poker への直接リンク" translate="no">​</a></h2>
+<p>Go Fish is a ZK implementation of "Mental Poker," the classic cryptographic problem of playing a fair card game without a trusted dealer. It's built entirely on a ZK contract, which means any card-like game (poker, blackjack, trick-taking games) can be implemented on top of the same protocol. Trustless card games, no server needed.</p>
+<p>The protocol uses a commit-reveal scheme combined with shared secret derivation. When cards are "dealt," the deck is encrypted so that neither player can read it alone. Each card reveal requires cooperative decryption: both players contribute their share to reveal a card, which means neither side can peek ahead or manipulate the draw order. A fair deal is enforced by the math, not by trusting a server.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/go-fish" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+<li class=""><a href="https://docs.google.com/document/d/1FTXbkeUkDAVDI45KWkmQGFHYqPuSQxiX6wW6mYv0FOY/edit" target="_blank" rel="noopener noreferrer" class="">Cryptography design document</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1gpwcnFksFkytiP6G9OORXyd5aWLv51bB/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="safe-solver-multichain-l2-on-arbitrum--midnight">Safe Solver: multichain L2 on Arbitrum + Midnight<a href="https://effectstream.github.io/docs/ja/blog/game-templates#safe-solver-multichain-l2-on-arbitrum--midnight" class="hash-link" aria-label="Safe Solver: multichain L2 on Arbitrum + Midnight への直接リンク" title="Safe Solver: multichain L2 on Arbitrum + Midnight への直接リンク" translate="no">​</a></h2>
+<p>Safe Solver is a fast, interactive puzzle game that runs multichain on Arbitrum and <a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight</a>. It demonstrates EffectStream working as an L2 across both chains, with deterministic randomness derived per block and L2 interaction for game execution.</p>
+<p>The game itself is a puzzle where players solve safe combinations on-chain. The random puzzle generation is deterministic per block, so all nodes reach the same result. EffectStream handles game logic and state transitions as an L2, while Arbitrum and Midnight provide the settlement layers. This is a good example of how a fast, interactive game can work on-chain without sacrificing responsiveness.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/safe-solver" target="_blank" rel="noopener noreferrer" class="">Source code</a></li>
+<li class=""><a href="https://safesolver.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1KhkfE4dM5dI3Wo0P3Ij8V3rOTLdHaGX1/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kachina-kolosseum-multiplayer-midnight-zk-game">Kachina Kolosseum: multiplayer Midnight ZK game<a href="https://effectstream.github.io/docs/ja/blog/game-templates#kachina-kolosseum-multiplayer-midnight-zk-game" class="hash-link" aria-label="Kachina Kolosseum: multiplayer Midnight ZK game への直接リンク" title="Kachina Kolosseum: multiplayer Midnight ZK game への直接リンク" translate="no">​</a></h2>
+<p>Kachina Kolosseum is a multiplayer PvP game built entirely on Midnight, demonstrating commit-reveal schemes written in Compact (Midnight's ZK language). All proofs are generated in the browser, so players don't need any backend infrastructure to play.</p>
+<p>In PvP on a public blockchain, the second player has an inherent advantage: they can see the first player's move and counter it. The commit-reveal scheme in Compact fixes this. Both players commit their moves privately, then reveal simultaneously. ZK proofs verify the revealed move matches the original commitment without exposing it early. If someone refuses to reveal (griefing), a timeout kicks in and they forfeit. Proof generation happens client-side and completes in under a second.</p>
+<ul>
+<li class=""><a href="https://kachina.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/pvp-arena" target="_blank" rel="noopener noreferrer" class="">Source code</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1nWB8zxtxPLHfFZIw3trh0bAylb6DE8JT/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="block-kart-legends-on-chain-typescript-simulation-on-arbitrum--midnight">Block Kart Legends: on-chain TypeScript simulation on Arbitrum + Midnight<a href="https://effectstream.github.io/docs/ja/blog/game-templates#block-kart-legends-on-chain-typescript-simulation-on-arbitrum--midnight" class="hash-link" aria-label="Block Kart Legends: on-chain TypeScript simulation on Arbitrum + Midnight への直接リンク" title="Block Kart Legends: on-chain TypeScript simulation on Arbitrum + Midnight への直接リンク" translate="no">​</a></h2>
+<p>Block Kart Legends is a racing game that runs complex on-chain TypeScript simulation cross-chain on Arbitrum and Midnight. It generates a deterministic L2 based on EVM + Midnight blocks, where it executes the race simulations. The entire race physics run deterministically in the L2, so every node computes the same result.</p>
+<p>Arbitrum handles the transaction layer (race entries, rewards, leaderboard updates), while Midnight provides ZK verification of race results. This means a player's race time is provably legitimate without needing a centralized game server to validate every result.</p>
+<ul>
+<li class=""><a href="https://blockkart.paimastudios.com/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+<li class=""><a href="https://github.com/effectstream/block-kart-legends" target="_blank" rel="noopener noreferrer" class="">Source code</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1ccQkU2bNeJLPzqsURORuzctcg0kZqpSe/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dust-2-dust-large-scale-zk-game-in-compact">Dust-2-Dust: large-scale ZK game in Compact<a href="https://effectstream.github.io/docs/ja/blog/game-templates#dust-2-dust-large-scale-zk-game-in-compact" class="hash-link" aria-label="Dust-2-Dust: large-scale ZK game in Compact への直接リンク" title="Dust-2-Dust: large-scale ZK game in Compact への直接リンク" translate="no">​</a></h2>
+<p>The most technically complex template. Dust-2-Dust is a roguelike deck builder written entirely in Compact (Midnight's ZK language), proving that ZK languages can encode and execute complex game behaviors. All proofs are calculated with WASM in the browser.</p>
+<p>This isn't a simple proof-of-concept. It's a full game with hidden inventory, private resource management, and strategic decisions that stay secret until their effects show up in gameplay. Multiple interacting ZK circuits compose together for complex game logic while preserving privacy throughout.</p>
+<ul>
+<li class=""><a href="https://dust2dust.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/midnight-game-2/" target="_blank" rel="noopener noreferrer" class="">Source code</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1FjfRFUPtxoIVSWhiFV0I7CtdS43xuM-L/preview" width="100%" height="480" allow="autoplay"></iframe>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="all-templates-at-a-glance">All templates at a glance<a href="https://effectstream.github.io/docs/ja/blog/game-templates#all-templates-at-a-glance" class="hash-link" aria-label="All templates at a glance への直接リンク" title="All templates at a glance への直接リンク" translate="no">​</a></h2>
+<table><thead><tr><th>Template</th><th>Chain</th><th>What's novel</th><th>Live URL</th></tr></thead><tbody><tr><td><strong>Go Fish</strong></td><td>Midnight</td><td>ZK Mental Poker, trustless card games on a ZK contract</td><td>Local only</td></tr><tr><td><strong>Safe Solver</strong></td><td>Arbitrum + Midnight</td><td>Multichain L2, deterministic random per block</td><td><a href="https://safesolver.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">safesolver.midnight.fun</a></td></tr><tr><td><strong>Kachina Kolosseum</strong></td><td>Midnight</td><td>Multiplayer ZK game, browser proofs, Compact commit-reveal</td><td><a href="https://kachina.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">kachina.midnight.fun</a></td></tr><tr><td><strong>Block Kart Legends</strong></td><td>Arbitrum + Midnight</td><td>On-chain TypeScript simulation, deterministic L2</td><td><a href="https://blockkart.paimastudios.com/" target="_blank" rel="noopener noreferrer" class="">blockkart.paimastudios.com</a></td></tr><tr><td><strong>Dust-2-Dust</strong></td><td>Midnight</td><td>Full roguelike deck builder in Compact, WASM browser proofs</td><td><a href="https://dust2dust.midnight.fun/" target="_blank" rel="noopener noreferrer" class="">dust2dust.midnight.fun</a></td></tr></tbody></table>
+<p>Every template is a complete, deployable game you can fork, modify, and ship. The <a href="https://github.com/PaimaStudios/paima-game-templates" target="_blank" rel="noopener noreferrer" class="">game templates repository</a> is the fastest way to start building with EffectStream.</p>]]></content:encoded>
+            <category>templates</category>
+            <category>games</category>
+            <category>open-source</category>
+            <category>midnight</category>
+            <category>zk</category>
+        </item>
+        <item>
+            <title><![CDATA[Cross-Chain Privacy: Midnight + Cardano Zero-Knowledge Integration]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/mina-zk-integration</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/mina-zk-integration</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Cardano provides strong settlement guarantees, but all state is public. For applications that need private computation (secret ballots, hidden hands, confidential business logic), that's a real limitation. By integrating Midnight's ZK-native design with Cardano, EffectStream applications can have public settlement on Cardano with private state via Midnight's zero-knowledge proofs.]]></description>
+            <content:encoded><![CDATA[<p>Cardano provides strong settlement guarantees, but all state is public. For applications that need private computation (secret ballots, hidden hands, confidential business logic), that's a real limitation. By integrating Midnight's ZK-native design with Cardano, EffectStream applications can have public settlement on Cardano with private state via Midnight's zero-knowledge proofs.</p>
+<div>Loading diagram...</div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-privacy-gap-on-cardano">The privacy gap on Cardano<a href="https://effectstream.github.io/docs/ja/blog/mina-zk-integration#the-privacy-gap-on-cardano" class="hash-link" aria-label="The privacy gap on Cardano への直接リンク" title="The privacy gap on Cardano への直接リンク" translate="no">​</a></h2>
+<p>Cardano's UTxO model is transparent by design: every transaction, every datum, every output is visible on the public ledger. That's great for financial transparency, but it's a problem for applications that need private state:</p>
+<ul>
+<li class=""><strong>Voting</strong>: ballots should stay private until the vote closes</li>
+<li class=""><strong>Games</strong>: hidden hands, fog-of-war, and secret strategies need private state</li>
+<li class=""><strong>Business logic</strong>: competitive information shouldn't be visible to rivals</li>
+</ul>
+<p><a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight</a> is a privacy-focused blockchain with native zero-knowledge proof support. Combining Cardano's settlement with Midnight's private computation gives applications the best of both worlds.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-delegation-voting-template">Private Delegation Voting template<a href="https://effectstream.github.io/docs/ja/blog/mina-zk-integration#private-delegation-voting-template" class="hash-link" aria-label="Private Delegation Voting template への直接リンク" title="Private Delegation Voting template への直接リンク" translate="no">​</a></h2>
+<p>To show this cross-chain privacy pattern in practice, we built a <strong>Private Delegation Voting</strong> template that combines Cardano stake pool delegation data with Midnight's ZK proofs for private ballot casting.</p>
+<p>Here's the concept: a governance vote where voting power comes from your Cardano stake pool delegation, but your actual vote stays private. The system proves via zero-knowledge that:</p>
+<ol>
+<li class="">The voter has a valid Cardano delegation (verified on-chain)</li>
+<li class="">The vote was cast correctly (the ballot is well-formed)</li>
+<li class="">The voter hasn't voted twice (nullifier prevents double-voting)</li>
+</ol>
+<p>...without revealing which pool the voter delegates to or how they voted. The delegation data comes from Cardano via EffectStream's PoolDelegation primitive, and the privacy layer runs on Midnight.</p>
+<p><img decoding="async" loading="lazy" alt="Private Delegation Voting: Cardano + Midnight cross-chain ZK voting with stake pool delegation" src="https://effectstream.github.io/docs/ja/assets/images/zk-cardano-84dbfd70f1ab3446128a1e04164c991b.png" width="1600" height="1352" class="img_ev3q"></p>
+<p>This template is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which includes the full ZK-Cardano template alongside five new Cardano primitives.</p>
+<iframe src="https://drive.google.com/file/d/1qeFPXN3cjsd66aFn-kgu2q8fqTr8SA-A/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works">How it works<a href="https://effectstream.github.io/docs/ja/blog/mina-zk-integration#how-it-works" class="hash-link" aria-label="How it works への直接リンク" title="How it works への直接リンク" translate="no">​</a></h2>
+<p>EffectStream uses a "funnel" abstraction to read data from multiple blockchains through a unified interface. Adding a new chain means implementing a new funnel; the developer's state machine receives events from all configured chains without needing to know each chain's data format.</p>
+<p>For the Midnight + Cardano integration:</p>
+<ol>
+<li class=""><strong>Cardano funnel</strong> reads delegation state via Dolos/UTxORPC (who delegates to which pool, how much stake)</li>
+<li class=""><strong>Midnight funnel</strong> reads ZK proof submissions and private state transitions</li>
+<li class=""><strong>EffectStream state machine</strong> combines both data sources, verifying delegation eligibility from Cardano while preserving vote privacy from Midnight</li>
+</ol>
+<p>The batcher system supports Midnight wallets via <a href="https://www.npmjs.com/package/@effectstream/wallets" target="_blank" rel="noopener noreferrer" class=""><code>@effectstream/wallets</code></a>, which provides unified wallet support across EVM, Cardano, Midnight, Polkadot, Algorand, and Mina. Users can sign transactions with Midnight wallets, making it a first-class chain in the framework.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="beyond-voting-the-privacy-pattern">Beyond voting: the privacy pattern<a href="https://effectstream.github.io/docs/ja/blog/mina-zk-integration#beyond-voting-the-privacy-pattern" class="hash-link" aria-label="Beyond voting: the privacy pattern への直接リンク" title="Beyond voting: the privacy pattern への直接リンク" translate="no">​</a></h2>
+<p>Private Delegation Voting is one application of the Cardano + ZK pattern, but the architecture generalizes. Any scenario where public chain data needs private processing fits:</p>
+<ul>
+<li class=""><strong>Private governance</strong> - vote with your Cardano stake without revealing your position</li>
+<li class=""><strong>Hidden-hand games</strong> - use Cardano NFTs as game pieces with hidden state on Midnight</li>
+<li class=""><strong>Confidential analytics</strong> - prove facts about on-chain data without revealing the underlying data</li>
+<li class=""><strong>Anonymous credentials</strong> - prove you meet criteria (delegation amount, token holdings) without identifying yourself</li>
+</ul>
+<p>Each follows the same template: read public state from Cardano, process it privately on Midnight, publish only the ZK proof.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="local-zk-proof-generation">Local ZK proof generation<a href="https://effectstream.github.io/docs/ja/blog/mina-zk-integration#local-zk-proof-generation" class="hash-link" aria-label="Local ZK proof generation への直接リンク" title="Local ZK proof generation への直接リンク" translate="no">​</a></h2>
+<p>Beyond chain-integrated ZK, EffectStream also supports computing zero-knowledge proofs locally, without settling to any ZK chain. This removes the network dependency while keeping the privacy guarantees:</p>
+<ul>
+<li class="">Lower latency (no network round-trip)</li>
+<li class="">Lower cost (no on-chain fees for proof verification)</li>
+<li class="">Offline capability (proofs can be generated without network access)</li>
+</ul>
+<p>The trade-off is in verification: chain-verified proofs inherit the chain's security guarantees, while locally-verified proofs need the application to validate them. For many use cases (anti-cheat in games, client-side validation), local proofs are sufficient and quite a bit faster.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - ZK-Cardano template</li>
+<li class=""><a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight Network</a></li>
+<li class=""><a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch Module</a> - streaming protocol for Cardano data</li>
+</ul>]]></content:encoded>
+            <category>midnight</category>
+            <category>zk-proofs</category>
+            <category>privacy</category>
+            <category>cross-chain</category>
+            <category>cardano</category>
+        </item>
+        <item>
+            <title><![CDATA[Building a Cross-Chain NFT Launchpad]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/nft-launchpad</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/nft-launchpad</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[NFT launches are complicated. Creators need smart contracts for the sale, a UI for buyers, multi-chain payment support, proof of participation, and fulfillment tracking. We built a full launchpad platform that handles all of this, with EffectStream powering the backend state management and cross-chain payment processing.]]></description>
+            <content:encoded><![CDATA[<p>NFT launches are complicated. Creators need smart contracts for the sale, a UI for buyers, multi-chain payment support, proof of participation, and fulfillment tracking. We built a full launchpad platform that handles all of this, with EffectStream powering the backend state management and cross-chain payment processing.</p>
+<p><img decoding="async" loading="lazy" alt="Launchpad UI, Cardano view with ADA prices, packages, and cart checkout" src="https://effectstream.github.io/docs/ja/assets/images/preorder-2-6eda4c6b4c77172b6084fd25c186f314.png" width="1014" height="1209" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-pre-order-smart-contract">The pre-order smart contract<a href="https://effectstream.github.io/docs/ja/blog/nft-launchpad#the-pre-order-smart-contract" class="hash-link" aria-label="The pre-order smart contract への直接リンク" title="The pre-order smart contract への直接リンク" translate="no">​</a></h2>
+<p>The foundation is a smart contract that manages the NFT pre-order lifecycle. When a campaign launches, the contract accepts deposits from participants. Each deposit is recorded with the contributor's wallet address, amount, and selected items. The contract enforces campaign rules: deposit limits, time windows, and refund conditions. If a campaign doesn't reach its goal, contributors can reclaim their funds. If it succeeds, the creator fulfills orders and distributes NFTs.</p>
+<p>The contract uses Aiken for Cardano-side validation and Solidity for EVM. Transaction metadata is validated on-chain to ensure payment integrity, and merkle trees efficiently prove participation for later NFT claims.</p>
+<ul>
+<li class=""><a href="https://github.com/PaimaStudios/paima-preorder" target="_blank" rel="noopener noreferrer" class="">Backend code</a></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-separate-deployments">Why separate deployments<a href="https://effectstream.github.io/docs/ja/blog/nft-launchpad#why-separate-deployments" class="hash-link" aria-label="Why separate deployments への直接リンク" title="Why separate deployments への直接リンク" translate="no">​</a></h2>
+<p>The backend is powered by EffectStream, with each presale campaign running as its own deployment. This isn't just organizational; it's a performance decision.</p>
+<p>If all campaigns shared one EffectStream instance, you'd need to resync one very long chain of events for every new campaign. That's especially painful when campaigns monitor multiple chains for payments, since each chain adds sync overhead. Separate deployments keep sync times fast and campaigns independent of each other.</p>
+<p>EffectStream's NTP-based sync (instead of block-based) makes this practical. The "main clock" is an NTP server, which is very cheap to poll, rather than a blockchain. The system only fetches blockchain data when relevant events occur, so a lightweight campaign deployment costs almost nothing when idle.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-launchpad-ui">The launchpad UI<a href="https://effectstream.github.io/docs/ja/blog/nft-launchpad#the-launchpad-ui" class="hash-link" aria-label="The launchpad UI への直接リンク" title="The launchpad UI への直接リンク" translate="no">​</a></h2>
+<p>The launchpad UI supports both EVM and Cardano wallets. Creators set up sales with configurable parameters (countdown timers, reward tiers, package bundles, item catalogs). Buyers browse campaigns, add items to a cart, and contribute funds from whichever chain they prefer.</p>
+<ul>
+<li class=""><a href="https://github.com/PaimaStudios/paima-portal/tree/main/src/components/launchpad" target="_blank" rel="noopener noreferrer" class="">Launchpad portal components</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/paima-portal/pull/7" target="_blank" rel="noopener noreferrer" class="">Portal integration PR</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1MiTyu_Et36zyE1qP7vWYG-2DEaUFyI-s/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cross-chain-payments">Cross-chain payments<a href="https://effectstream.github.io/docs/ja/blog/nft-launchpad#cross-chain-payments" class="hash-link" aria-label="Cross-chain payments への直接リンク" title="Cross-chain payments への直接リンク" translate="no">​</a></h2>
+<p>The launchpad accepts payments natively on each chain: Cardano users pay in ADA, EVM users pay in ETH or ERC-20 tokens. We originally planned to use bridge-based payments (Milkomeda for Cardano↔EVM), but pivoted to native chain primitives when the bridge infrastructure proved unreliable. Turned out to be simpler and more reliable anyway, with no dependency on third-party bridge availability.</p>
+<p>All payments are tracked in the backend database with full transaction details:</p>
+<p><img decoding="async" loading="lazy" alt="Database: cardano_payments table showing tx hashes, amounts, and block heights" src="https://effectstream.github.io/docs/ja/assets/images/preorder-3-74b1df3f1247f273080d87ca8e22c44f.png" width="1461" height="481" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Database: launchpad_user_items table mapping wallets to purchased items" src="https://effectstream.github.io/docs/ja/assets/images/preorder-4-f7b2049b607b8506ae5870e36a573eca.png" width="1458" height="624" class="img_ev3q"></p>
+<p>Proof-of-ownership endpoints let participants verify their contribution to a sale programmatically:</p>
+<ul>
+<li class=""><a href="https://github.com/PaimaStudios/paima-preorder/blob/main/backend/api/src/controllers/userData.ts" target="_blank" rel="noopener noreferrer" class="">Ownership verification API</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1pqhMsz90IY_yruJRUBjjzUDFJKmAc960/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-this-gets-you">What this gets you<a href="https://effectstream.github.io/docs/ja/blog/nft-launchpad#what-this-gets-you" class="hash-link" aria-label="What this gets you への直接リンク" title="What this gets you への直接リンク" translate="no">​</a></h2>
+<p>Creators get a turnkey platform for multi-chain NFT sales: deploy a campaign, configure tiers and pricing, accept payments from both Cardano and EVM wallets through a single interface. Buyers get a familiar e-commerce experience no matter which chain they're on.</p>]]></content:encoded>
+            <category>nfts</category>
+            <category>launchpad</category>
+            <category>presale</category>
+            <category>smart-contracts</category>
+            <category>cardano</category>
+            <category>evm</category>
+        </item>
+        <item>
+            <title><![CDATA[Projected NFTs: Using Cardano NFTs in Smart Contract Applications]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/projected-nfts</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/projected-nfts</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Users want to use their NFTs in applications (games, DeFi, social platforms) without giving up ownership. Projected NFTs solve this: lock an NFT on Cardano L1 and use a representation in your application. The NFT never leaves your wallet in any meaningful sense; it's locked in a smart contract you control, and you can unlock it at any time.]]></description>
+            <content:encoded><![CDATA[<p>Users want to use their NFTs in applications (games, DeFi, social platforms) without giving up ownership. Projected NFTs solve this: lock an NFT on Cardano L1 and use a representation in your application. The NFT never leaves your wallet in any meaningful sense; it's locked in a smart contract you control, and you can unlock it at any time.</p>
+<p><img decoding="async" loading="lazy" alt="Hololocker dApp showing Mint, Lock, Unlock, and Withdrawal Request lifecycle" src="https://effectstream.github.io/docs/ja/assets/images/holodeck-0da788076f043028f3dc64672f5f7533.png" width="927" height="694" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-aiken-smart-contract">The Aiken smart contract<a href="https://effectstream.github.io/docs/ja/blog/projected-nfts#the-aiken-smart-contract" class="hash-link" aria-label="The Aiken smart contract への直接リンク" title="The Aiken smart contract への直接リンク" translate="no">​</a></h2>
+<p>The Projected NFT smart contract is written in <a href="https://aiken-lang.org/" target="_blank" rel="noopener noreferrer" class="">Aiken</a>, Cardano's Rust-based smart contract language. It manages the full projection lifecycle:</p>
+<ol>
+<li class=""><strong>Lock</strong> - the user sends their NFT to the contract, which records the owner and NFT details in the datum</li>
+<li class=""><strong>Use</strong> - the application reads the locked state and grants in-app utility (powers, access, cosmetics)</li>
+<li class=""><strong>Unlock</strong> - the user initiates a withdrawal request</li>
+<li class=""><strong>Claim</strong> - after a cooldown period, the user claims the NFT back to their wallet</li>
+</ol>
+<p>The cooldown on withdrawal prevents flash-loan-style exploits where a user could project, gain benefits, and immediately unproject in the same transaction. A CI pipeline validates that the contract compiles on every change.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-hololocker-dapp">The Hololocker dApp<a href="https://effectstream.github.io/docs/ja/blog/projected-nfts#the-hololocker-dapp" class="hash-link" aria-label="The Hololocker dApp への直接リンク" title="The Hololocker dApp への直接リンク" translate="no">​</a></h2>
+<p>We built a full dApp called Hololocker for projecting and managing NFTs. It supports the complete lifecycle: mint new NFTs, lock them into the projection contract, view locked state, initiate unlock, and complete withdrawal.</p>
+<ul>
+<li class=""><a href="https://github.com/dcSpark/projected-nft-whirlpool" target="_blank" rel="noopener noreferrer" class="">Source code</a></li>
+<li class=""><a href="https://twitter.com/PaimaStudios/status/1734623090020057114" target="_blank" rel="noopener noreferrer" class="">Demo on Twitter</a></li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1TbBngP-OKCX38dDaVQGoXnd_HncEW-jw/preview" width="100%" height="480" allow="autoplay"></iframe>
+<iframe src="https://drive.google.com/file/d/12HzmHV7HI8msoc1yvI6zRqsZL69TSBeA/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="indexing-with-utxorpc-and-dolos">Indexing with UTxORPC and Dolos<a href="https://effectstream.github.io/docs/ja/blog/projected-nfts#indexing-with-utxorpc-and-dolos" class="hash-link" aria-label="Indexing with UTxORPC and Dolos への直接リンク" title="Indexing with UTxORPC and Dolos への直接リンク" translate="no">​</a></h2>
+<p>To track NFT lock/unlock events in real-time, we originally built a <a href="https://dcspark.github.io/carp/" target="_blank" rel="noopener noreferrer" class="">Carp</a> indexer task. But Carp requires heavy synchronization (days on testnet, even longer on mainnet), which made rapid development impractical.</p>
+<p>We've since moved to <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> via the UTxORPC protocol. The new <strong>ProjectedNFT primitive</strong> in EffectStream reads projection events directly from Dolos's gRPC stream, parsing the datum to extract lock status, owner, policy ID, and asset name. This is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which introduces five new Cardano primitives backed by an IVM (Indexed View Materializer) with PostgreSQL materialized views.</p>
+<p>The ProjectedNFT primitive tracks:</p>
+<ul>
+<li class="">Lock events (NFT enters the projection contract)</li>
+<li class="">Unlock requests (user initiates withdrawal)</li>
+<li class="">Claim completions (NFT returns to user's wallet)</li>
+<li class="">Current projection status per NFT (datum parsing for owner, policy, asset)</li>
+</ul>
+<p>All state changes are streamed in real-time through UTxORPC's <a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">Watch module</a>, which supports filtering by address, delegation part, and asset policy.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="framework-integration">Framework integration<a href="https://effectstream.github.io/docs/ja/blog/projected-nfts#framework-integration" class="hash-link" aria-label="Framework integration への直接リンク" title="Framework integration への直接リンク" translate="no">​</a></h2>
+<p>The ProjectedNFT primitive connects to EffectStream's funnel system, the abstraction layer that reads data from multiple blockchains. When an NFT is projected or unprojected, the event flows through the funnel into the application's state machine. Developers react to it in their game logic like any other event.</p>
+<p>A game could grant in-game powers when a player projects a specific NFT, remove them when it's unprojected, or display a player's projected collection as their in-game inventory.</p>
+<p>The integration is end-to-end tested with 21 E2E tests covering the full lifecycle: stake registration, delegation, lock, unlock, and claim, all verified against a local Dolos instance.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-full-stack">The full stack<a href="https://effectstream.github.io/docs/ja/blog/projected-nfts#the-full-stack" class="hash-link" aria-label="The full stack への直接リンク" title="The full stack への直接リンク" translate="no">​</a></h2>
+<p>Five layers work together to make Projected NFTs possible:</p>
+<table><thead><tr><th>Layer</th><th>Technology</th><th>Role</th></tr></thead><tbody><tr><td>Smart Contract</td><td>Aiken</td><td>Lock/unlock logic on Cardano L1</td></tr><tr><td>Indexer</td><td>Dolos + UTxORPC</td><td>Real-time event streaming via gRPC</td></tr><tr><td>Primitive</td><td>EffectStream IVM</td><td>State materialization in PostgreSQL</td></tr><tr><td>Framework</td><td>EffectStream funnel</td><td>Event delivery to application state machine</td></tr><tr><td>dApp</td><td>Hololocker</td><td>User interface for projection lifecycle</td></tr></tbody></table>
+<p>This lets games use Cardano NFTs for in-game utility without transferring ownership, DeFi protocols collateralize without moving assets, and social platforms gate features based on NFT holdings. The NFT stays under the user's control the whole time.</p>]]></content:encoded>
+            <category>cardano</category>
+            <category>nfts</category>
+            <category>aiken</category>
+            <category>smart-contracts</category>
+            <category>dolos</category>
+            <category>utxorpc</category>
+        </item>
+        <item>
+            <title><![CDATA[Stake Pool Delegation: Connecting Cardano SPOs to On-Chain Applications]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/stakepool-delegation</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/stakepool-delegation</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Cardano's stake pool ecosystem has millions of ADA delegated across hundreds of pools, but delegation has always been a one-way relationship: delegators earn rewards, and that's it. What if games and apps could react to where you delegate? What if stake pool operators could offer in-game benefits to their delegators? EffectStream now makes this possible with a new PoolDelegation primitive that streams delegation changes in real-time.]]></description>
+            <content:encoded><![CDATA[<p>Cardano's stake pool ecosystem has millions of ADA delegated across hundreds of pools, but delegation has always been a one-way relationship: delegators earn rewards, and that's it. What if games and apps could react to where you delegate? What if stake pool operators could offer in-game benefits to their delegators? EffectStream now makes this possible with a new PoolDelegation primitive that streams delegation changes in real-time.</p>
+<div>Loading diagram...</div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-challenge-indexing-delegation-state">The challenge: indexing delegation state<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#the-challenge-indexing-delegation-state" class="hash-link" aria-label="The challenge: indexing delegation state への直接リンク" title="The challenge: indexing delegation state への直接リンク" translate="no">​</a></h2>
+<p>Delegation changes on Cardano are ledger state transitions, not traditional transactions. When a user delegates to a new pool, there's no explicit "delegation event" in the transaction log; the change shows up in the ledger state at epoch boundaries. That makes delegation harder to index than token transfers or smart contract interactions.</p>
+<p>The original approach used <a href="https://dcspark.github.io/carp/" target="_blank" rel="noopener noreferrer" class="">Carp</a> as the indexer, but Carp requires syncing the full Cardano chain history. That takes days on testnet and even longer on mainnet. For local development and rapid iteration, it was a non-starter.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-solution-dolos--utxorpc-watch">The solution: Dolos + UTxORPC Watch<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#the-solution-dolos--utxorpc-watch" class="hash-link" aria-label="The solution: Dolos + UTxORPC Watch への直接リンク" title="The solution: Dolos + UTxORPC Watch への直接リンク" translate="no">​</a></h2>
+<p>We replaced Carp with <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a>, a lightweight Cardano node that exposes chain data via the UTxORPC gRPC protocol. The key part is the <a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch module</a>, which provides real-time transaction streaming with filtering:</p>
+<ul>
+<li class=""><strong>By address</strong> - watch all transactions involving a specific address</li>
+<li class=""><strong>By delegation part</strong> - watch transactions by stake credential, finding all UTxOs delegated to a specific stake key</li>
+<li class=""><strong>By asset policy</strong> - watch transactions involving tokens from a specific policy</li>
+</ul>
+<p>For stake pool delegation, the "by delegation part" filter is the important one. It lets EffectStream detect when any address changes its delegation to or from a monitored pool, without scanning the entire chain.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-pooldelegation-primitive">The PoolDelegation primitive<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#the-pooldelegation-primitive" class="hash-link" aria-label="The PoolDelegation primitive への直接リンク" title="The PoolDelegation primitive への直接リンク" translate="no">​</a></h2>
+<p>The new <strong>PoolDelegation</strong> primitive is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which adds five Cardano primitives to EffectStream. PoolDelegation reads delegation events from Dolos via UTxORPC and materializes them into PostgreSQL using EffectStream's IVM (Indexed View Materializer).</p>
+<p>The primitive tracks:</p>
+<ul>
+<li class=""><strong>Stake registrations</strong> - new stake addresses entering the system</li>
+<li class=""><strong>Delegation changes</strong> - an address moving from one pool to another</li>
+<li class=""><strong>Deregistrations</strong> - stake addresses leaving the system</li>
+</ul>
+<p>All state is kept in PostgreSQL materialized views, giving applications fast query access to current delegation state without re-scanning the chain. When a delegation change occurs, the event flows through EffectStream's funnel system into the application's state machine as a first-class event, just like a smart contract interaction or token transfer.</p>
+<p>Here's the Cardano Stake Pool Delegation Explorer dApp, where you can look up delegation info, register stake keys, and trigger delegations:</p>
+<p><img decoding="async" loading="lazy" alt="Cardano Stake Pool Delegation Explorer dApp" src="https://effectstream.github.io/docs/ja/assets/images/delegate-pool1-354644d9722993f0dca5cc468756244d.png" width="1648" height="1236" class="img_ev3q"></p>
+<p>And this is the terminal output showing EffectStream detecting delegation changes as they happen, with the state machine reacting to each one:</p>
+<p><img decoding="async" loading="lazy" alt="Terminal showing delegation side effects being detected in real-time" src="https://effectstream.github.io/docs/ja/assets/images/delegate-pool2-b4ec722bac53722ebdb8249517f0d5d8.png" width="1537" height="1015" class="img_ev3q"></p>
+<iframe src="https://drive.google.com/file/d/1DvNhISjGyhZW93bcKLKl8akLl9iJfLc3/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-developers-can-build">What developers can build<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#what-developers-can-build" class="hash-link" aria-label="What developers can build への直接リンク" title="What developers can build への直接リンク" translate="no">​</a></h2>
+<p>With delegation data flowing into the state machine, developers can build game logic that reacts to where players delegate:</p>
+<ul>
+<li class="">"This area is accessible only to delegators of Pool X" (unlock content)</li>
+<li class="">"All delegators of Pool Y receive a bonus item at epoch boundary" (distribute rewards)</li>
+<li class="">Adjust game parameters based on which pools your players support (dynamic difficulty)</li>
+<li class="">Delegators of partner pools get free transaction batching via the <code>BATCHER_CARDANO_ENABLED_POOLS</code> config (the SPO covers the cost)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pool-aware-batcher-free-transactions-for-delegators">Pool-aware batcher: free transactions for delegators<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#pool-aware-batcher-free-transactions-for-delegators" class="hash-link" aria-label="Pool-aware batcher: free transactions for delegators への直接リンク" title="Pool-aware batcher: free transactions for delegators への直接リンク" translate="no">​</a></h2>
+<p>The most direct SPO use-case is the pool-aware batcher: a stake pool operator spins up a batcher that covers gas fees, but only for users delegating to their pool. The batcher exposes a <code>validateInput()</code> hook that queries the same <code>delegations</code> table the sync node writes to, checks the user's current pool against a configured <code>ENABLED_POOLS</code> set, and accepts or rejects the input before it enters the queue.</p>
+<p>Configuration is a single array of pool operator keyhashes. Delegators of those pools post game transactions for free (<code>fee: 0n</code> — the SPO covers the cost); non-delegators get rejected with a clear error before consuming any batch slot.</p>
+<p>The walkthrough below shows the full flow: the batcher is started with two enabled pools, a delegator of one of those pools posts a transaction and is accepted, and a non-delegator posts the same transaction and is rejected — all visible at the HTTP layer.</p>
+<iframe src="https://drive.google.com/file/d/1EI3hvbpCP8QzSTyyzcr2pHFQHeH9D2A_/preview" width="100%" height="480" allow="autoplay"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="end-to-end-testing">End-to-end testing<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#end-to-end-testing" class="hash-link" aria-label="End-to-end testing への直接リンク" title="End-to-end testing への直接リンク" translate="no">​</a></h2>
+<p>The PoolDelegation primitive is covered by EffectStream's E2E test suite, part of 21 tests in PR #673 that verify the full Cardano primitive lifecycle. The delegation tests cover stake address registration, initial delegation to a pool, delegation change detection, and state verification in PostgreSQL materialized views. All tests run against a local Dolos instance with YACI DevKit, so CI runs fast with no mainnet or testnet dependencies.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-bigger-picture">The bigger picture<a href="https://effectstream.github.io/docs/ja/blog/stakepool-delegation#the-bigger-picture" class="hash-link" aria-label="The bigger picture への直接リンク" title="The bigger picture への直接リンク" translate="no">​</a></h2>
+<p>Stake pool delegation becomes a game mechanic. SPOs offer in-game benefits, players choose pools based on gameplay advantages, and a new economic layer sits on top of Cardano's existing delegation system. Delegation goes from a passive yield-earning activity to an active strategic decision: you delegate to a pool not just for staking rewards, but for the games and apps that pool supports.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - PoolDelegation primitive implementation</li>
+<li class=""><a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch Module</a> - streaming transaction protocol</li>
+<li class=""><a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> - lightweight Cardano node</li>
+</ul>]]></content:encoded>
+            <category>cardano</category>
+            <category>stakepools</category>
+            <category>delegation</category>
+            <category>dolos</category>
+            <category>utxorpc</category>
+        </item>
+        <item>
+            <title><![CDATA[AI-Powered Gameplay: Integrating Deterministic LLMs with On-Chain Games]]></title>
+            <link>https://effectstream.github.io/docs/ja/blog/user-experience-integrations</link>
+            <guid>https://effectstream.github.io/docs/ja/blog/user-experience-integrations</guid>
+            <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What happens when you put an AI engine inside an on-chain game? Not a cloud API call that could return different results each time, but a deterministic LLM that runs locally and produces verifiable, reproducible outputs. We integrated Shinkai, a deterministic LLM engine, into an EffectStream game template to find out.]]></description>
+            <content:encoded><![CDATA[<p>What happens when you put an AI engine inside an on-chain game? Not a cloud API call that could return different results each time, but a deterministic LLM that runs locally and produces verifiable, reproducible outputs. We integrated <a href="https://shinkai.com/" target="_blank" rel="noopener noreferrer" class="">Shinkai</a>, a deterministic LLM engine, into an EffectStream game template to find out.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-determinism-problem">The determinism problem<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#the-determinism-problem" class="hash-link" aria-label="The determinism problem への直接リンク" title="The determinism problem への直接リンク" translate="no">​</a></h2>
+<p>Standard LLM APIs (OpenAI, Anthropic, etc.) are non-deterministic: the same prompt can produce different outputs on each call. For off-chain apps that's fine, but on-chain games need reproducibility. If a game's state machine processes an AI response, every node running that state machine must produce the same result. Non-deterministic AI breaks consensus.</p>
+<p>Shinkai solves this by running models locally with deterministic inference. Same input, same output, every time. That makes it compatible with on-chain state machines where every participant must agree on the result.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quest-for-tokens-ai-npc-gameplay">Quest for Tokens: AI NPC gameplay<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#quest-for-tokens-ai-npc-gameplay" class="hash-link" aria-label="Quest for Tokens: AI NPC gameplay への直接リンク" title="Quest for Tokens: AI NPC gameplay への直接リンク" translate="no">​</a></h2>
+<p>To show what AI-powered on-chain gameplay looks like, we built <strong>Quest for Tokens</strong>, a game where an AI NPC judges player answers and awards tokens based on response quality.</p>
+<p><img decoding="async" loading="lazy" alt="Quest for Tokens: title screen with floating castle and &amp;quot;Enter the Kingdom&amp;quot;" src="https://effectstream.github.io/docs/ja/assets/images/taiko1-4248b9f3f3052c632c8f9bad589f1649.png" width="2020" height="1056" class="img_ev3q"></p>
+<p>Here's the game flow:</p>
+<ol>
+<li class="">The player enters the game world and encounters an AI NPC (a tiger guardian)</li>
+<li class="">The NPC asks a question, drawn from game state so it varies based on context</li>
+<li class="">The player types their answer</li>
+<li class="">The AI evaluates the response and decides how many tokens to award</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="AI gameplay: tiger NPC asking a question with wallet signature popup" src="https://effectstream.github.io/docs/ja/assets/images/taiko2-acb8ac84433eb7f90545eb823843e021.png" width="2042" height="1131" class="img_ev3q"></p>
+<p>The wallet signature popup in the screenshot shows the on-chain integration. The player's answer is signed and submitted as a blockchain transaction. The AI's evaluation is also processed on-chain, so the token award is verifiable and permanent.</p>
+<p><img decoding="async" loading="lazy" alt="AI NPC response: evaluating the player&amp;#39;s answer and awarding tokens" src="https://effectstream.github.io/docs/ja/assets/images/taiko3-f01182c843a4e8df7bf7060f3fbfd44c.png" width="2167" height="1294" class="img_ev3q"></p>
+<p>The AI doesn't just give a score; it explains its reasoning. Players can see why their answer earned or lost tokens, which creates an engaging feedback loop that feels more like a conversation than a multiple-choice quiz.</p>
+<ul>
+<li class=""><a href="https://taiko-demo.paimastudios.com/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/pull/78" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-matters-for-on-chain-games">Why this matters for on-chain games<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#why-this-matters-for-on-chain-games" class="hash-link" aria-label="Why this matters for on-chain games への直接リンク" title="Why this matters for on-chain games への直接リンク" translate="no">​</a></h2>
+<p>AI NPCs open up game mechanics that weren't possible with deterministic-only logic:</p>
+<ul>
+<li class=""><strong>Dynamic content</strong> - AI generates questions, dialog, and scenarios that vary with game state; no two playthroughs are the same</li>
+<li class=""><strong>Natural interaction</strong> - players type freeform responses instead of picking from a menu; the AI parses intent and evaluates quality</li>
+<li class=""><strong>Emergent gameplay</strong> - the AI's judgment creates situations that the game designer didn't explicitly program</li>
+</ul>
+<p>And because Shinkai's inference is deterministic, all of this works in an on-chain context. Every node processing the game state gets the same AI output, maintaining consensus across the network.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-integration-architecture">The integration architecture<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#the-integration-architecture" class="hash-link" aria-label="The integration architecture への直接リンク" title="The integration architecture への直接リンク" translate="no">​</a></h2>
+<p>Three systems connect together:</p>
+<table><thead><tr><th>Component</th><th>Role</th></tr></thead><tbody><tr><td><strong>EffectStream</strong></td><td>Game state machine: processes moves, tracks tokens, manages the game world</td></tr><tr><td><strong>Shinkai</strong></td><td>Deterministic LLM engine: evaluates player inputs and generates NPC responses</td></tr><tr><td><strong>Blockchain</strong></td><td>Settlement layer: records player actions and token awards permanently</td></tr></tbody></table>
+<p>The player's input flows from the browser → wallet signature → blockchain transaction → EffectStream state machine → Shinkai evaluation → state update → token award. The entire pipeline is on-chain and verifiable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="wallet-and-session-management">Wallet and session management<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#wallet-and-session-management" class="hash-link" aria-label="Wallet and session management への直接リンク" title="Wallet and session management への直接リンク" translate="no">​</a></h2>
+<p>The game uses EffectStream's <a href="https://www.npmjs.com/package/@effectstream/wallets" target="_blank" rel="noopener noreferrer" class=""><code>@effectstream/wallets</code></a> package for wallet connections. Players connect their wallet to sign game actions, with the option of auto-sign delegation for a smoother experience (no wallet popup on every move).</p>
+<p>The wallet layer supports multiple chains, so the same game template could run on EVM, Cardano, or Midnight. The AI integration and game logic stay the same no matter which settlement chain you pick.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="building-ai-powered-games">Building AI-powered games<a href="https://effectstream.github.io/docs/ja/blog/user-experience-integrations#building-ai-powered-games" class="hash-link" aria-label="Building AI-powered games への直接リンク" title="Building AI-powered games への直接リンク" translate="no">​</a></h2>
+<p>Quest for Tokens is a starting point. The template has the full pipeline from AI evaluation to on-chain settlement. Fork it and customize the AI's evaluation criteria, the reward structure, the game context (what the NPC asks), and the NPC personality. The <a href="https://github.com/PaimaStudios/paima-game-templates" target="_blank" rel="noopener noreferrer" class="">game templates repository</a> has the full source code, ready to deploy.</p>]]></content:encoded>
+            <category>ai</category>
+            <category>shinkai</category>
+            <category>wallets</category>
+            <category>game-templates</category>
+        </item>
+    </channel>
+</rss>
