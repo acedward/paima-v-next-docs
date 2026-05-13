@@ -113,7 +113,7 @@
 <p>A DA layer like <a href="https://celestia.org/" target="_blank" rel="noopener noreferrer" class="">Celestia</a> provides an alternative: post high-throughput data cheaply to the DA layer, while settlement (asset transfers, contract state changes) stays on the main chain. EffectStream's state machine processes events from both layers without the developer having to think about it.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="celestia-integration-architecture">Celestia integration architecture<a href="https://effectstream.github.io/docs/blog/celestia-data-availability#celestia-integration-architecture" class="hash-link" aria-label="Direct link to Celestia integration architecture" title="Direct link to Celestia integration architecture" translate="no">​</a></h2>
 <p>The Celestia integration adds a new data path to EffectStream's batcher system. The batcher aggregates individual user submissions into batches and posts them to Celestia for data availability, while settlement transactions go to the configured settlement chain.</p>
-<p>The integration is implemented in <a href="https://github.com/effectstream/effectstream/pull/680" target="_blank" rel="noopener noreferrer" class="">PR #680</a> ("Zswap DA Demo"), which includes:</p>
+<p>The integration lives in the <a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/bun-zswap-da" target="_blank" rel="noopener noreferrer" class=""><code>bun-zswap-da</code> template</a>, which includes:</p>
 <ul>
 <li class=""><strong>Batcher</strong> that aggregates and posts batches to Celestia</li>
 <li class=""><strong>Database</strong> tracking submitted batches, token states, and offer lifecycle</li>
@@ -145,7 +145,7 @@
 <table><thead><tr><th>Data type</th><th>Layer</th><th>Why</th></tr></thead><tbody><tr><td>Game moves, chat messages, state updates</td><td>Celestia DA</td><td>Cheap, fast, high-throughput</td></tr><tr><td>Asset transfers, minting, contract calls</td><td>Settlement chain (Cardano/EVM)</td><td>Full security guarantees</td></tr></tbody></table>
 <p>The developer configures which data goes where, and the framework handles routing, batching, and event delivery.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/680" target="_blank" rel="noopener noreferrer" class="">Celestia integration PR #680</a></li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/bun-zswap-da" target="_blank" rel="noopener noreferrer" class="">Celestia integration code (<code>bun-zswap-da</code> template)</a></li>
 <li class=""><a href="https://celestia.org/developer-portal/" target="_blank" rel="noopener noreferrer" class="">Celestia documentation</a></li>
 </ul>]]></content:encoded>
             <category>celestia</category>
@@ -162,7 +162,7 @@
             <content:encoded><![CDATA[<p>EffectStream is designed to integrate with any game engine or platform. This article covers four distinct integrations, each showing a different technology combination: modern multi-chain local development tooling, a traditional game engine, social platform frames, and a mobile app.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="evm-cardano-local-development-environment">EVM-Cardano local development environment<a href="https://effectstream.github.io/docs/blog/engine-integrations#evm-cardano-local-development-environment" class="hash-link" aria-label="Direct link to EVM-Cardano local development environment" title="Direct link to EVM-Cardano local development environment" translate="no">​</a></h2>
 <p>One of the biggest friction points for multi-chain developers is setting up a local dev environment. Syncing a Cardano indexer like Carp can take days on testnet and even longer on mainnet, which makes rapid iteration pretty much impossible. We built a template that replaces this entire workflow with an instant localhost setup.</p>
-<p>The EVM-Cardano template, included in <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, combines:</p>
+<p>The EVM-Cardano template, <a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/evm-cardano" target="_blank" rel="noopener noreferrer" class="">available in the monorepo</a>, combines:</p>
 <ul>
 <li class=""><a href="https://hardhat.org/" target="_blank" rel="noopener noreferrer" class=""><strong>Hardhat v3</strong></a> for EVM smart contract development and a local EVM chain</li>
 <li class=""><a href="https://github.com/bloxbean/yaci-devkit" target="_blank" rel="noopener noreferrer" class=""><strong>YACI DevKit</strong></a> for a local Cardano devnet</li>
@@ -197,14 +197,15 @@
 <p>The most ambitious integration: a game template combining GPS location data for iOS and Android. Location-based gameplay where the assets you find, collect, and trade are real on-chain tokens.</p>
 <p>The mobile app communicates with an EffectStream backend that manages on-chain state, while the mobile layer renders game objects at GPS-determined positions. It shows that EffectStream works well beyond the browser.</p>
 <ul>
-<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/pull/85" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates" target="_blank" rel="noopener noreferrer" class="">Template code (<code>paima-game-templates</code> repository)</a></li>
 </ul>
 <iframe src="https://drive.google.com/file/d/16IH6do2cyxigKaxL996TtGqMFwHZR3Xs/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-common-thread">The common thread<a href="https://effectstream.github.io/docs/blog/engine-integrations#the-common-thread" class="hash-link" aria-label="Direct link to The common thread" title="Direct link to The common thread" translate="no">​</a></h2>
 <table><thead><tr><th>Integration</th><th>Platform</th><th>What's new</th></tr></thead><tbody><tr><td>EVM-Cardano</td><td>Local dev</td><td>Instant multi-chain dev environment, replacing days-long Carp sync</td></tr><tr><td>Game Maker</td><td>Desktop engine</td><td>Traditional game engine + blockchain backend</td></tr><tr><td>Farcaster Frame</td><td>Social feed</td><td>Play on-chain games without leaving the social platform</td></tr><tr><td>Mobile GPS</td><td>iOS/Android</td><td>Location-based on-chain gameplay</td></tr></tbody></table>
 <p>All templates are open-source in the <a href="https://github.com/PaimaStudios/paima-game-templates" target="_blank" rel="noopener noreferrer" class="">game templates repository</a>. The EVM-Cardano template with its Dolos-based local development stack is probably the most impactful: it removes the biggest barrier to Cardano development by getting rid of the sync time that's historically made local testing impractical.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - EVM-Cardano template with Dolos + YACI DevKit</li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/evm-cardano" target="_blank" rel="noopener noreferrer" class="">EVM-Cardano template code (Dolos + YACI DevKit)</a></li>
+<li class=""><a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 </ul>]]></content:encoded>
             <category>game-engines</category>
             <category>developer-tools</category>
@@ -296,7 +297,7 @@
 </ol>
 <p>...without revealing which pool the voter delegates to or how they voted. The delegation data comes from Cardano via EffectStream's PoolDelegation primitive, and the privacy layer runs on Midnight.</p>
 <p><img decoding="async" loading="lazy" alt="Private Delegation Voting: Cardano + Midnight cross-chain ZK voting with stake pool delegation" src="https://effectstream.github.io/docs/assets/images/zk-cardano-84dbfd70f1ab3446128a1e04164c991b.png" width="1600" height="1352" class="img_ev3q"></p>
-<p>This template is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which includes the full ZK-Cardano template alongside five new Cardano primitives.</p>
+<p>The full <a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/zk-cardano" target="_blank" rel="noopener noreferrer" class="">ZK-Cardano template</a> is available in the monorepo alongside five new <a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano primitives</a>.</p>
 <iframe src="https://drive.google.com/file/d/1qeFPXN3cjsd66aFn-kgu2q8fqTr8SA-A/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works">How it works<a href="https://effectstream.github.io/docs/blog/mina-zk-integration#how-it-works" class="hash-link" aria-label="Direct link to How it works" title="Direct link to How it works" translate="no">​</a></h2>
 <p>EffectStream uses a "funnel" abstraction to read data from multiple blockchains through a unified interface. Adding a new chain means implementing a new funnel; the developer's state machine receives events from all configured chains without needing to know each chain's data format.</p>
@@ -325,7 +326,8 @@
 </ul>
 <p>The trade-off is in verification: chain-verified proofs inherit the chain's security guarantees, while locally-verified proofs need the application to validate them. For many use cases (anti-cheat in games, client-side validation), local proofs are sufficient and quite a bit faster.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - ZK-Cardano template</li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/zk-cardano" target="_blank" rel="noopener noreferrer" class="">ZK-Cardano template code</a></li>
+<li class=""><a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 <li class=""><a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight Network</a></li>
 <li class=""><a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch Module</a> - streaming protocol for Cardano data</li>
 </ul>]]></content:encoded>
@@ -357,7 +359,7 @@
 <p>The launchpad UI supports both EVM and Cardano wallets. Creators set up sales with configurable parameters (countdown timers, reward tiers, package bundles, item catalogs). Buyers browse campaigns, add items to a cart, and contribute funds from whichever chain they prefer.</p>
 <ul>
 <li class=""><a href="https://github.com/PaimaStudios/paima-portal/tree/main/src/components/launchpad" target="_blank" rel="noopener noreferrer" class="">Launchpad portal components</a></li>
-<li class=""><a href="https://github.com/PaimaStudios/paima-portal/pull/7" target="_blank" rel="noopener noreferrer" class="">Portal integration PR</a></li>
+<li class=""><a href="https://github.com/PaimaStudios/paima-portal" target="_blank" rel="noopener noreferrer" class="">Portal repository</a></li>
 </ul>
 <iframe src="https://drive.google.com/file/d/1MiTyu_Et36zyE1qP7vWYG-2DEaUFyI-s/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cross-chain-payments">Cross-chain payments<a href="https://effectstream.github.io/docs/blog/nft-launchpad#cross-chain-payments" class="hash-link" aria-label="Direct link to Cross-chain payments" title="Direct link to Cross-chain payments" translate="no">​</a></h2>
@@ -406,7 +408,7 @@
 <iframe src="https://drive.google.com/file/d/12HzmHV7HI8msoc1yvI6zRqsZL69TSBeA/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="indexing-with-utxorpc-and-dolos">Indexing with UTxORPC and Dolos<a href="https://effectstream.github.io/docs/blog/projected-nfts#indexing-with-utxorpc-and-dolos" class="hash-link" aria-label="Direct link to Indexing with UTxORPC and Dolos" title="Direct link to Indexing with UTxORPC and Dolos" translate="no">​</a></h2>
 <p>To track NFT lock/unlock events in real-time, we originally built a <a href="https://dcspark.github.io/carp/" target="_blank" rel="noopener noreferrer" class="">Carp</a> indexer task. But Carp requires heavy synchronization (days on testnet, even longer on mainnet), which made rapid development impractical.</p>
-<p>We've since moved to <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> via the UTxORPC protocol. The new <strong>ProjectedNFT primitive</strong> in EffectStream reads projection events directly from Dolos's gRPC stream, parsing the datum to extract lock status, owner, policy ID, and asset name. This is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which introduces five new Cardano primitives backed by an IVM (Indexed View Materializer) with PostgreSQL materialized views.</p>
+<p>We've since moved to <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> via the UTxORPC protocol. The new <strong>ProjectedNFT primitive</strong> in EffectStream reads projection events directly from Dolos's gRPC stream, parsing the datum to extract lock status, owner, policy ID, and asset name. It is one of five new <a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano primitives</a> backed by an IVM (Indexed View Materializer) with PostgreSQL materialized views.</p>
 <p>The ProjectedNFT primitive tracks:</p>
 <ul>
 <li class="">Lock events (NFT enters the projection contract)</li>
@@ -420,7 +422,8 @@
 <p>A game could grant in-game powers when a player projects a specific NFT, remove them when it's unprojected, or display a player's projected collection as their in-game inventory.</p>
 <p>The integration is end-to-end tested with 21 E2E tests covering the full lifecycle: stake registration, delegation, lock, unlock, and claim, all verified against a local Dolos instance.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a></li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/packages/node-sdk/sm/primitives/src" target="_blank" rel="noopener noreferrer" class="">ProjectedNFT primitive source code</a></li>
+<li class=""><a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-full-stack">The full stack<a href="https://effectstream.github.io/docs/blog/projected-nfts#the-full-stack" class="hash-link" aria-label="Direct link to The full stack" title="Direct link to The full stack" translate="no">​</a></h2>
 <p>Five layers work together to make Projected NFTs possible:</p>
@@ -760,7 +763,7 @@
 <p>The AI doesn't just give a score; it explains its reasoning. Players can see why their answer earned or lost tokens, which creates an engaging feedback loop that feels more like a conversation than a multiple-choice quiz.</p>
 <ul>
 <li class=""><a href="https://tokenquest.zkdojo.com/" target="_blank" rel="noopener noreferrer" class="">Play live</a></li>
-<li class=""><a href="https://github.com/PaimaStudios/paima-game-templates/pull/78" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/shinkai-v2" target="_blank" rel="noopener noreferrer" class="">Template code</a></li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-matters-for-on-chain-games">Why this matters for on-chain games<a href="https://effectstream.github.io/docs/blog/user-experience-integrations#why-this-matters-for-on-chain-games" class="hash-link" aria-label="Direct link to Why this matters for on-chain games" title="Direct link to Why this matters for on-chain games" translate="no">​</a></h2>
 <p>AI NPCs open up game mechanics that weren't possible with deterministic-only logic:</p>

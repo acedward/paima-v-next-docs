@@ -16,8 +16,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.bb5df795.css">
-<script src="/docs/assets/js/runtime~main.f1d52165.js" defer="defer"></script>
-<script src="/docs/assets/js/main.cd26242e.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.e2f768f3.js" defer="defer"></script>
+<script src="/docs/assets/js/main.951a22a6.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -44,7 +44,7 @@
 <iframe src="https://drive.google.com/file/d/12HzmHV7HI8msoc1yvI6zRqsZL69TSBeA/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="indexing-with-utxorpc-and-dolos">Indexing with UTxORPC and Dolos<a href="#indexing-with-utxorpc-and-dolos" class="hash-link" aria-label="Direct link to Indexing with UTxORPC and Dolos" title="Direct link to Indexing with UTxORPC and Dolos" translate="no">​</a></h2>
 <p>To track NFT lock/unlock events in real-time, we originally built a <a href="https://dcspark.github.io/carp/" target="_blank" rel="noopener noreferrer" class="">Carp</a> indexer task. But Carp requires heavy synchronization (days on testnet, even longer on mainnet), which made rapid development impractical.</p>
-<p>We&#x27;ve since moved to <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> via the UTxORPC protocol. The new <strong>ProjectedNFT primitive</strong> in EffectStream reads projection events directly from Dolos&#x27;s gRPC stream, parsing the datum to extract lock status, owner, policy ID, and asset name. This is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which introduces five new Cardano primitives backed by an IVM (Indexed View Materializer) with PostgreSQL materialized views.</p>
+<p>We&#x27;ve since moved to <a href="https://github.com/txpipe/dolos" target="_blank" rel="noopener noreferrer" class="">Dolos</a> via the UTxORPC protocol. The new <strong>ProjectedNFT primitive</strong> in EffectStream reads projection events directly from Dolos&#x27;s gRPC stream, parsing the datum to extract lock status, owner, policy ID, and asset name. It is one of five new <a class="" href="/docs/home/chains/cardano#primitives">Cardano primitives</a> backed by an IVM (Indexed View Materializer) with PostgreSQL materialized views.</p>
 <p>The ProjectedNFT primitive tracks:</p>
 <ul>
 <li class="">Lock events (NFT enters the projection contract)</li>
@@ -58,7 +58,8 @@
 <p>A game could grant in-game powers when a player projects a specific NFT, remove them when it&#x27;s unprojected, or display a player&#x27;s projected collection as their in-game inventory.</p>
 <p>The integration is end-to-end tested with 21 E2E tests covering the full lifecycle: stake registration, delegation, lock, unlock, and claim, all verified against a local Dolos instance.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a></li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/packages/node-sdk/sm/primitives/src" target="_blank" rel="noopener noreferrer" class="">ProjectedNFT primitive source code</a></li>
+<li class=""><a class="" href="/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-full-stack">The full stack<a href="#the-full-stack" class="hash-link" aria-label="Direct link to The full stack" title="Direct link to The full stack" translate="no">​</a></h2>
 <p>Five layers work together to make Projected NFTs possible:</p>

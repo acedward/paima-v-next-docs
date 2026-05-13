@@ -16,8 +16,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.bb5df795.css">
-<script src="/docs/assets/js/runtime~main.f1d52165.js" defer="defer"></script>
-<script src="/docs/assets/js/main.cd26242e.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.e2f768f3.js" defer="defer"></script>
+<script src="/docs/assets/js/main.951a22a6.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -43,7 +43,7 @@
 </ol>
 <p>...without revealing which pool the voter delegates to or how they voted. The delegation data comes from Cardano via EffectStream&#x27;s PoolDelegation primitive, and the privacy layer runs on Midnight.</p>
 <p><img decoding="async" loading="lazy" alt="Private Delegation Voting: Cardano + Midnight cross-chain ZK voting with stake pool delegation" src="/docs/assets/images/zk-cardano-84dbfd70f1ab3446128a1e04164c991b.png" width="1600" height="1352" class="img_ev3q"></p>
-<p>This template is part of <a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">PR #673</a>, which includes the full ZK-Cardano template alongside five new Cardano primitives.</p>
+<p>The full <a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/zk-cardano" target="_blank" rel="noopener noreferrer" class="">ZK-Cardano template</a> is available in the monorepo alongside five new <a class="" href="/docs/home/chains/cardano#primitives">Cardano primitives</a>.</p>
 <iframe src="https://drive.google.com/file/d/1qeFPXN3cjsd66aFn-kgu2q8fqTr8SA-A/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works">How it works<a href="#how-it-works" class="hash-link" aria-label="Direct link to How it works" title="Direct link to How it works" translate="no">​</a></h2>
 <p>EffectStream uses a &quot;funnel&quot; abstraction to read data from multiple blockchains through a unified interface. Adding a new chain means implementing a new funnel; the developer&#x27;s state machine receives events from all configured chains without needing to know each chain&#x27;s data format.</p>
@@ -72,7 +72,8 @@
 </ul>
 <p>The trade-off is in verification: chain-verified proofs inherit the chain&#x27;s security guarantees, while locally-verified proofs need the application to validate them. For many use cases (anti-cheat in games, client-side validation), local proofs are sufficient and quite a bit faster.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/pull/673" target="_blank" rel="noopener noreferrer" class="">EffectStream PR #673</a> - ZK-Cardano template</li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/zk-cardano" target="_blank" rel="noopener noreferrer" class="">ZK-Cardano template code</a></li>
+<li class=""><a class="" href="/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 <li class=""><a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight Network</a></li>
 <li class=""><a href="https://utxorpc.org/watch/intro/" target="_blank" rel="noopener noreferrer" class="">UTxORPC Watch Module</a> - streaming protocol for Cardano data</li>
 </ul></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/midnight">midnight</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/zk-proofs">zk-proofs</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/privacy">privacy</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/cross-chain">cross-chain</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/cardano">cardano</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/blog/game-templates"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">Game Template Library: On-Chain Game Patterns for Every Chain</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/blog/nft-launchpad"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Building a Cross-Chain NFT Launchpad</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#the-privacy-gap-on-cardano" class="table-of-contents__link toc-highlight">The privacy gap on Cardano</a></li><li><a href="#private-delegation-voting-template" class="table-of-contents__link toc-highlight">Private Delegation Voting template</a></li><li><a href="#how-it-works" class="table-of-contents__link toc-highlight">How it works</a></li><li><a href="#beyond-voting-the-privacy-pattern" class="table-of-contents__link toc-highlight">Beyond voting: the privacy pattern</a></li><li><a href="#local-zk-proof-generation" class="table-of-contents__link toc-highlight">Local ZK proof generation</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
