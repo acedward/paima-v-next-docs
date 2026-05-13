@@ -342,7 +342,20 @@
 <li class="">Offline capability (proofs can be generated without network access)</li>
 </ul>
 <p>The trade-off is in verification: chain-verified proofs inherit the chain's security guarantees, while locally-verified proofs need the application to validate them. For many use cases (anti-cheat in games, client-side validation), local proofs are sufficient and quite a bit faster.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="template-werewolf-multiplayer-zk-with-browser-proofs">Template: Werewolf (multiplayer ZK with browser proofs)<a href="https://effectstream.github.io/docs/blog/mina-zk-integration#template-werewolf-multiplayer-zk-with-browser-proofs" class="hash-link" aria-label="Direct link to Template: Werewolf (multiplayer ZK with browser proofs)" title="Direct link to Template: Werewolf (multiplayer ZK with browser proofs)" translate="no">​</a></h2>
+<p>The clearest worked example of local proofs is <strong>Werewolf</strong> — a multiplayer Mafia-style template where every player's role, night action, and vote stays private behind a ZK proof. The Compact contract tracks alive players in a Merkle tree and uses nullifiers to prevent double-voting; each player-side proof is generated <strong>in the browser</strong> before the input reaches the game server.</p>
+<p><img decoding="async" loading="lazy" alt="Werewolf game — 3D table with multiple players, ZK roles hidden, Compact contract enforcing inclusion proofs and nullifiers" src="https://effectstream.github.io/docs/assets/images/werewolf-game-655f87f3d7fdcb84162a4e6b9dfb4e1e.png" width="1207" height="819" class="img_ev3q"></p>
+<p>The night/day loop is structured around two ZK actions:</p>
 <ul>
+<li class=""><strong>Night action</strong> — werewolves submit an encrypted target with a ZK proof that they hold the werewolf role. The role itself never appears in any log.</li>
+<li class=""><strong>Vote</strong> — any alive player votes to eliminate, attaching a ZK inclusion proof against the alive-player Merkle root plus a nullifier so the same player can't vote twice.</li>
+</ul>
+<p>The full stack runs locally with no external dependency: Midnight node, indexer, proof server, game server, and frontend all spin up from the template's README. Template source: <a href="https://github.com/effectstream/werewolf-game" target="_blank" rel="noopener noreferrer" class=""><code>effectstream/werewolf-game</code></a>.</p>
+<p>A second template, <a href="https://github.com/effectstream/go-fish" target="_blank" rel="noopener noreferrer" class="">Go Fish</a>, uses the same local-proof pattern for ZK Mental Poker — trustless card games without a dealer, with all card commitments and reveals proved client-side.</p>
+<ul>
+<li class=""><a href="https://github.com/effectstream/werewolf-game" target="_blank" rel="noopener noreferrer" class="">Werewolf template code</a></li>
+<li class=""><a href="https://github.com/effectstream/werewolf-game/tree/main/packages/shared/contracts/midnight/contract-werewolf/src" target="_blank" rel="noopener noreferrer" class="">Werewolf Compact contract source</a></li>
+<li class=""><a href="https://github.com/effectstream/go-fish" target="_blank" rel="noopener noreferrer" class="">Go Fish template (ZK Mental Poker)</a></li>
 <li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/templates/zk-cardano" target="_blank" rel="noopener noreferrer" class="">ZK-Cardano template code</a></li>
 <li class=""><a class="" href="https://effectstream.github.io/docs/home/chains/cardano#primitives">Cardano Primitives documentation</a></li>
 <li class=""><a href="https://midnight.network/" target="_blank" rel="noopener noreferrer" class="">Midnight Network</a></li>
