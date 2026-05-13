@@ -16,8 +16,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.bb5df795.css">
-<script src="/docs/assets/js/runtime~main.1fba62ac.js" defer="defer"></script>
-<script src="/docs/assets/js/main.62e364f3.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.896cf09c.js" defer="defer"></script>
+<script src="/docs/assets/js/main.2d8b6179.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -69,6 +69,8 @@
 <p><img decoding="async" loading="lazy" alt="midnight.fun games portal showing Block Kart, Kachina, and Safe Solver with achievements and leaderboards" src="/docs/assets/images/midnightfun-cad04b67e8b36607db375ecb6b04f988.png" width="1551" height="1669" class="img_ev3q"></p>
 <p>The screenshot shows the midnight.fun portal pulling data from all three games. Each game card displays live achievement counts and leaderboard positions, sourced from the PRC-1 and PRC-6 APIs. There&#x27;s no centralized database here; the data lives in each game&#x27;s node, and the portal queries it on the fly.</p>
 <iframe src="https://drive.google.com/file/d/1SSpY_nFAIm95b7v4LSEDhSywYgAkx0nK/preview" width="100%" height="480" allow="autoplay"></iframe>
+<p>The walkthrough below shows the full earn-to-display loop: a player plays a game, unlocks an achievement, and the unlock surfaces immediately on the live leaderboard via the PRC-6 endpoints.</p>
+<iframe src="https://drive.google.com/file/d/1j9KKy3Z2Jw5LAxK1a-PWNzUIhJj_-6H7/preview" width="100%" height="480" allow="autoplay"></iframe>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-works-under-the-hood">How it works under the hood<a href="#how-it-works-under-the-hood" class="hash-link" aria-label="Direct link to How it works under the hood" title="Direct link to How it works under the hood" translate="no">​</a></h2>
 <p>When a player connects their wallet to midnight.fun, the portal queries each game&#x27;s PRC-1 endpoint to fetch that player&#x27;s achievements. Because the standard uses wallet addresses as the primary identifier, achievements are cross-game and cross-platform by default: any portal or app can query any PRC-1 game.</p>
 <p>For games using auto-sign (session key delegation), PRC-6&#x27;s identity resolution makes sure achievements don&#x27;t get &quot;lost&quot; on temporary session wallets. The delegation chain maps session keys back to the player&#x27;s main wallet, so everything gets attributed correctly no matter which signing method was used.</p>
