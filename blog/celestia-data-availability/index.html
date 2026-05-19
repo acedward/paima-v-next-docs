@@ -14,9 +14,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.b8177307.css">
-<script src="/docs/assets/js/runtime~main.4faecdcc.js" defer="defer"></script>
-<script src="/docs/assets/js/main.10f581a6.js" defer="defer"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.b8f7f16b.css">
+<script src="/docs/assets/js/runtime~main.996b0ae7.js" defer="defer"></script>
+<script src="/docs/assets/js/main.b4f249de.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -29,7 +29,7 @@
 <p>A DA layer like <a href="https://celestia.org/" target="_blank" rel="noopener noreferrer" class="">Celestia</a> provides an alternative: post high-throughput data cheaply to the DA layer, while settlement (asset transfers, contract state changes) stays on the main chain. EffectStream&#x27;s state machine processes events from both layers without the developer having to think about it.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="celestia-integration-architecture">Celestia integration architecture<a href="#celestia-integration-architecture" class="hash-link" aria-label="Direct link to Celestia integration architecture" title="Direct link to Celestia integration architecture" translate="no">​</a></h2>
 <p>The Celestia integration adds a new data path to EffectStream&#x27;s batcher system. The batcher aggregates individual user submissions into batches and posts them to Celestia for data availability, while settlement transactions go to the configured settlement chain.</p>
-<p>The integration lives in the <a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/bun-zswap-da" target="_blank" rel="noopener noreferrer" class=""><code>bun-zswap-da</code> template</a>, which includes:</p>
+<p>The integration lives in the <a href="https://github.com/effectstream/effectstream/tree/v-next/bun-zswap-da" target="_blank" rel="noopener noreferrer" class=""><code>bun-zswap-da</code> template</a>, which includes:</p>
 <ul>
 <li class=""><strong>Batcher</strong> that aggregates and posts batches to Celestia</li>
 <li class=""><strong>Database</strong> tracking submitted batches, token states, and offer lifecycle</li>
@@ -61,7 +61,7 @@
 <table><thead><tr><th>Data type</th><th>Layer</th><th>Why</th></tr></thead><tbody><tr><td>Game moves, chat messages, state updates</td><td>Celestia DA</td><td>Cheap, fast, high-throughput</td></tr><tr><td>Asset transfers, minting, contract calls</td><td>Settlement chain (Cardano/EVM)</td><td>Full security guarantees</td></tr></tbody></table>
 <p>The developer configures which data goes where, and the framework handles routing, batching, and event delivery.</p>
 <ul>
-<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next-bun-start/bun-zswap-da" target="_blank" rel="noopener noreferrer" class="">Celestia integration code (<code>bun-zswap-da</code> template)</a></li>
+<li class=""><a href="https://github.com/effectstream/effectstream/tree/v-next/bun-zswap-da" target="_blank" rel="noopener noreferrer" class="">Celestia integration code (<code>bun-zswap-da</code> template)</a></li>
 <li class=""><a href="https://celestia.org/developer-portal/" target="_blank" rel="noopener noreferrer" class="">Celestia documentation</a></li>
 </ul></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/celestia">celestia</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/data-availability">data-availability</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/cross-chain">cross-chain</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/scalability">scalability</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/blog/auto-sign"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">Auto-Sign: Eliminating Wallet Pop-ups for Real-Time Applications</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/blog/cardano-primitives"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Cardano Primitives: From Indexer Tasks to First-Class Chain Events</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#why-a-data-availability-layer" class="table-of-contents__link toc-highlight">Why a data availability layer?</a></li><li><a href="#celestia-integration-architecture" class="table-of-contents__link toc-highlight">Celestia integration architecture</a></li><li><a href="#how-it-works" class="table-of-contents__link toc-highlight">How it works</a></li><li><a href="#parallel-funnel-architecture" class="table-of-contents__link toc-highlight">Parallel funnel architecture</a></li><li><a href="#when-to-use-a-da-layer" class="table-of-contents__link toc-highlight">When to use a DA layer</a></li><li><a href="#hybrid-dapp-pattern" class="table-of-contents__link toc-highlight">Hybrid dApp pattern</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
 </body>
