@@ -15,8 +15,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.b8f7f16b.css">
-<script src="/docs/assets/js/runtime~main.996b0ae7.js" defer="defer"></script>
-<script src="/docs/assets/js/main.b4f249de.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.30113e07.js" defer="defer"></script>
+<script src="/docs/assets/js/main.65c5ce21.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -47,9 +47,9 @@
 <p>This demo is an essential resource for any developer looking to build a multi-chain dApp on EffectStream.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-run">How to Run<a href="#how-to-run" class="hash-link" aria-label="Direct link to How to Run" title="Direct link to How to Run" translate="no">​</a></h2>
 <p>(TODO move to own template)</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno install --allow-scripts &amp;&amp; ./patch.sh</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task -f @e2e/evm-contracts build</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task -f @e2e/evm-contracts deploy:standalone</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task -f @e2e/midnight-contracts midnight-contract:compile</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task -f @e2e/node dev</span><br></div></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun i</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run --cwd e2e/shared/contracts/evm build</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run --cwd e2e/shared/contracts/evm deploy:standalone</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run --cwd e2e/shared/contracts/midnight midnight-contract:compile</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run --cwd e2e/evm dev</span><br></div></code></pre></div></div>
 <p>In another terminal, run the demo:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task -f @e2e/wallets-ui dev</span><br></div></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run --cwd e2e/wallets-ui dev</span><br></div></code></pre></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-components-in-action">The Components in Action<a href="#the-components-in-action" class="hash-link" aria-label="Direct link to The Components in Action" title="Direct link to The Components in Action" translate="no">​</a></h2>
 <p>The demo is a standalone React + Vite application. Its interface is divided into three main sections:</p>
 <ol>

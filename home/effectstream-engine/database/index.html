@@ -15,8 +15,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.b8f7f16b.css">
-<script src="/docs/assets/js/runtime~main.996b0ae7.js" defer="defer"></script>
-<script src="/docs/assets/js/main.b4f249de.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.30113e07.js" defer="defer"></script>
+<script src="/docs/assets/js/main.65c5ce21.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -47,7 +47,7 @@
 <div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">-- TODO</span><br></div></code></pre></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="generating-typescript-functions">Generating TypeScript Functions<a href="#generating-typescript-functions" class="hash-link" aria-label="Direct link to Generating TypeScript Functions" title="Direct link to Generating TypeScript Functions" translate="no">​</a></h3>
 <p>After writing your queries, you run a simple command:</p>
-<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">deno task </span><span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-f</span><span class="token plain"> @effectstream/db pgtyped:update</span><br></div></code></pre></div></div>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run </span><span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">--cwd</span><span class="token plain"> packages/node-sdk/db pgtyped:update</span><br></div></code></pre></div></div>
 <p>This command introspects your SQL files and your database schema, then generates corresponding TypeScript functions.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="system-tables-overview">System Tables Overview<a href="#system-tables-overview" class="hash-link" aria-label="Direct link to System Tables Overview" title="Direct link to System Tables Overview" translate="no">​</a></h3>
 <p>The <code>effectstream</code> schema contains a number of tables essential for the engine&#x27;s operation. Here are a few of the most important ones:</p>

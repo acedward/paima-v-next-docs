@@ -15,8 +15,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.b8f7f16b.css">
-<script src="/docs/assets/js/runtime~main.996b0ae7.js" defer="defer"></script>
-<script src="/docs/assets/js/main.b4f249de.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.30113e07.js" defer="defer"></script>
+<script src="/docs/assets/js/main.65c5ce21.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -29,6 +29,12 @@
 versioned <code>bitcoind</code> and <code>bitcoin-cli</code> into <code>node_modules/.bin</code> so the
 EffectStream orchestrator and E2E tests can boot a local regtest
 without each developer running their own install script.</p>
+<ul>
+<li class="">Pins Bitcoin Core 28.1 for local regtest.</li>
+<li class="">Linux / macOS, x64 and arm64.</li>
+<li class="">Pairs with <code>@effectstream/bitcoin-contracts</code> for <code>generate-blocks</code> and <code>wait-for-block</code>.</li>
+<li class="">Used by the orchestrator&#x27;s Bitcoin step.</li>
+</ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="install">Install<a href="#install" class="hash-link" aria-label="Direct link to Install" title="Direct link to Install" translate="no">​</a></h2>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun </span><span class="token function" style="color:rgb(80, 250, 123)">add</span><span class="token plain"> @effectstream/bitcoin-core</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)"># or</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token function" style="color:rgb(80, 250, 123)">npm</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">install</span><span class="token plain"> @effectstream/bitcoin-core</span><br></div></code></pre></div></div>
 <p>Currently pins <strong>Bitcoin Core 28.1</strong>.</p>
@@ -43,12 +49,12 @@ for the <code>generate-blocks</code> and <code>wait-for-block</code> helpers.</p
 <p>The orchestrator (<code>@effectstream/orchestrator</code>) declares this as a
 dependency of its <code>bitcoin-core</code> step, so <code>bun packages/build-tools/orchestrator/src/cli.ts start</code>
 brings up a regtest chain automatically. The Bitcoin E2E suite at
-<a href="https://github.com/PaimaStudios/paima-engine/tree/main/e2e/bitcoin" target="_blank" rel="noopener noreferrer" class=""><code>e2e/bitcoin/</code></a>
+<a href="https://github.com/effectstream/effectstream/tree/main/e2e/bitcoin" target="_blank" rel="noopener noreferrer" class=""><code>e2e/bitcoin/</code></a>
 runs against this same binary.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="links">Links<a href="#links" class="hash-link" aria-label="Direct link to Links" title="Direct link to Links" translate="no">​</a></h2>
 <ul>
 <li class="">Docs: <a href="https://effectstream.github.io/docs/packages/binaries/bitcoin-core" target="_blank" rel="noopener noreferrer" class="">https://effectstream.github.io/docs/packages/binaries/bitcoin-core</a></li>
-<li class="">Source: <a href="https://github.com/PaimaStudios/paima-engine/tree/main/packages/binaries/bitcoin-core" target="_blank" rel="noopener noreferrer" class="">https://github.com/PaimaStudios/paima-engine/tree/main/packages/binaries/bitcoin-core</a></li>
+<li class="">Source: <a href="https://github.com/effectstream/effectstream/tree/main/packages/binaries/bitcoin-core" target="_blank" rel="noopener noreferrer" class="">https://github.com/effectstream/effectstream/tree/main/packages/binaries/bitcoin-core</a></li>
 <li class="">Upstream Bitcoin Core: <a href="https://bitcoincore.org/" target="_blank" rel="noopener noreferrer" class="">https://bitcoincore.org/</a></li>
 </ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/PaimaStudios/paima-engine-docs/tree/main/docs/home/500-packages/540-binaries/bitcoin-core.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/home/packages/binaries/avail-node"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">avail-node</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/home/packages/binaries/celestia"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">celestia</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#install" class="table-of-contents__link toc-highlight">Install</a></li><li><a href="#standalone-usage" class="table-of-contents__link toc-highlight">Standalone usage</a></li><li><a href="#inside-effectstream" class="table-of-contents__link toc-highlight">Inside EffectStream</a></li><li><a href="#links" class="table-of-contents__link toc-highlight">Links</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
 </body>
