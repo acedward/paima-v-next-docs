@@ -1010,6 +1010,7 @@
 <p>Shinkai solves this by running models locally with deterministic inference. Same input, same output, every time. That makes it compatible with on-chain state machines where every participant must agree on the result.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="quest-for-tokens-ai-npc-gameplay">Quest for Tokens: AI NPC gameplay<a href="https://effectstream.github.io/docs/blog/user-experience-integrations#quest-for-tokens-ai-npc-gameplay" class="hash-link" aria-label="Direct link to Quest for Tokens: AI NPC gameplay" title="Direct link to Quest for Tokens: AI NPC gameplay" translate="no">​</a></h2>
 <p>To show what AI-powered on-chain gameplay looks like, we built <strong>Quest for Tokens</strong>, a game where an AI NPC judges player answers and awards tokens based on response quality.</p>
+<iframe width="100%" height="415" src="https://www.youtube.com/embed/QZkM4W8Md-E" title="Quest for Tokens: AI-powered on-chain gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
 <p><img decoding="async" loading="lazy" alt="Quest for Tokens: title screen with floating castle and &amp;quot;Enter the Kingdom&amp;quot;" src="https://effectstream.github.io/docs/assets/images/taiko1-4248b9f3f3052c632c8f9bad589f1649.png" width="2020" height="1056" class="img_ev3q"></p>
 <p>Here's the game flow:</p>
 <ol>
