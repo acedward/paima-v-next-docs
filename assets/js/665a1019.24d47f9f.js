@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_effectstream_docs=globalThis.webpackChunk_effectstream_docs||[]).push([[5944],{69168(a){a.exports=JSON.parse('{"blogBasePath":"/docs/learn-compact-with-games","blogTitle":"Learn Compact with Games","authorsListPath":"/docs/learn-compact-with-games/authors"}')}}]);
