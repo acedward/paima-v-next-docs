@@ -2,11 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://effectstream.github.io/docs/blog</id>
     <title>EffectStream Blog</title>
-    <updated>2026-05-29T00:00:00.000Z</updated>
+    <updated>2026-06-09T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://effectstream.github.io/docs/blog"/>
     <subtitle>EffectStream Blog</subtitle>
     <icon>https://effectstream.github.io/docs/img/favicon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[A Cardano Presale, Part 2: Clone, Publish, Launch the App]]></title>
+        <id>https://effectstream.github.io/docs/blog/cardano-presale-launchpad</id>
+        <link href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad"/>
+        <updated>2026-06-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is part two of a two-part series on building a presale on Cardano. Part one covered the on-chain contract - how a purchase receipt is enforced so a participation is only recorded if the buyer really paid. This post is about the app on top of it.]]></summary>
+        <content type="html"><![CDATA[<p>This is part two of a two-part series on building a presale on Cardano. <a class="" href="https://effectstream.github.io/docs/blog/cardano-onchain-preorder-validator">Part one</a> covered the on-chain contract - how a purchase receipt is enforced so a participation is only recorded if the buyer really paid. This post is about the app on top of it.</p>
+<p>Standing up a presale used to mean wiring a sale contract, an indexer, a payment flow, and a UI before you could take a single order. With the EffectStream preorder launchpad, creating a campaign on Cardano comes down to two steps: clone and publish. This post walks through the app built on top of that contract - and the piece that makes the Cardano side genuinely fast: UTxORPC.</p>
+<p><img decoding="async" loading="lazy" alt="EffectStream preorder launchpad: a Cardano presale checkout paying for an item in ADA, with the UTxORPC sync running alongside" src="https://effectstream.github.io/docs/assets/images/preorder-cardano-demo-fb797f76e01d805a08670283e39aad02.gif" width="900" height="506" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-the-app-does">What the app does<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#what-the-app-does" class="hash-link" aria-label="Direct link to What the app does" title="Direct link to What the app does" translate="no">​</a></h2>
+<p>The launchpad is a barebones but complete presale application. From it you can:</p>
+<ul>
+<li class="">create and end campaigns,</li>
+<li class="">browse every ongoing presale and its catalog,</li>
+<li class="">contribute to a campaign by paying on-chain, and</li>
+<li class="">see your own contributions and balances, per wallet.</li>
+</ul>
+<p>All of that state is projected from on-chain events by a single EffectStream node. No campaign logic lives in the frontend, and the database is a replayable projection of the chain rather than a source of truth.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="create-a-campaign-by-cloning-and-publishing">Create a campaign by cloning and publishing<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#create-a-campaign-by-cloning-and-publishing" class="hash-link" aria-label="Direct link to Create a campaign by cloning and publishing" title="Direct link to Create a campaign by cloning and publishing" translate="no">​</a></h2>
+<p>There is no hosted control panel to sign up for. You clone the template and run it:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">git</span><span class="token plain"> clone https://github.com/effectstream/effectstream.git</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> effectstream/templates/preorder</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun </span><span class="token function" style="color:rgb(80, 250, 123)">install</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun run dev</span><br></div></code></pre></div></div>
+<p><code>bun run dev</code> boots the whole local stack - database, the EVM and Cardano dev chains, the sync node, and the frontend. On startup the app publishes a <code>create-campaign</code> input on-chain, signed by the admin wallet, and the state machine ingests it. The campaign's configuration - its catalog, pricing, and reward tiers - lives on-chain, so the whole campaign is deterministic and replayable from genesis. Ending a campaign is the same shape: an <code>end-campaign</code> admin input that the state machine applies.</p>
+<p>That is the "publish" half. Cloning the template and publishing a campaign config is all it takes to have a live, multi-chain presale.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-the-cardano-side-is-fast-utxorpc">Why the Cardano side is fast: UTxORPC<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#why-the-cardano-side-is-fast-utxorpc" class="hash-link" aria-label="Direct link to Why the Cardano side is fast: UTxORPC" title="Direct link to Why the Cardano side is fast: UTxORPC" translate="no">​</a></h2>
+<p>Historically, indexing Cardano meant running a full node and chasing the tip block by block - heavy to operate and slow to catch up. The launchpad does not do that. Its sync layer streams blocks through Dolos over UTxORPC, a lightweight interface to Cardano's UTxO data.</p>
+<p>Two things fall out of that:</p>
+<ul>
+<li class=""><strong>Cheap to run.</strong> EffectStream's sync is NTP-clocked, not block-clocked - it only reaches for chain data when a campaign actually has relevant activity, so an idle campaign costs almost nothing.</li>
+<li class=""><strong>Quick to launch.</strong> A fresh campaign deployment does not resync the entire history of every chain it might ever watch; UTxORPC lets it come up and start tracking payments in seconds.</li>
+</ul>
+<p>The payoff is that each presale can be its own independent deployment - its own database, sync node, and frontend - without paying a punishing sync cost. That independence is what makes "clone and publish per campaign" practical on Cardano.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="contributing-balances-and-the-admin-view">Contributing, balances, and the admin view<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#contributing-balances-and-the-admin-view" class="hash-link" aria-label="Direct link to Contributing, balances, and the admin view" title="Direct link to Contributing, balances, and the admin view" translate="no">​</a></h2>
+<p>On the public page, a buyer connects a Cardano wallet, picks an item, and pays in ADA. The clip above shows the checkout: the Catalyst Item at 21.75 ADA, the wallet's UTxO balance, and a single Sign &amp; Submit step. Once the payment settles, the buyer's "My Purchases" panel reflects their per-wallet balance.</p>
+<p>On the admin side, the campaign creator manages the catalog - adding a new product is a signed on-chain input that the public page picks up live - and can end the campaign when the sale is over.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="watch-the-full-flow">Watch the full flow<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#watch-the-full-flow" class="hash-link" aria-label="Direct link to Watch the full flow" title="Direct link to Watch the full flow" translate="no">​</a></h2>
+<iframe width="100%" height="415" src="https://www.youtube.com/embed/DieQvTTTJUM" title="Launching a Cardano presale with EffectStream (Part 2)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+<p>The walkthrough runs the whole thing end to end: clone the repo, boot the stack, watch the <code>create-campaign</code> land on startup, the UTxORPC sync catch up, an admin add a product, and a buyer purchase it with ADA.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="run-it-yourself">Run it yourself<a href="https://effectstream.github.io/docs/blog/cardano-presale-launchpad#run-it-yourself" class="hash-link" aria-label="Direct link to Run it yourself" title="Direct link to Run it yourself" translate="no">​</a></h2>
+<ul>
+<li class="">Preorder template (full multi-chain stack, runs locally with one command): <a href="https://github.com/effectstream/effectstream/tree/v-next/templates/preorder" target="_blank" rel="noopener noreferrer" class="">https://github.com/effectstream/effectstream/tree/v-next/templates/preorder</a></li>
+<li class="">Launchpad portal frontend: <a href="https://github.com/PaimaStudios/paima-portal" target="_blank" rel="noopener noreferrer" class="">https://github.com/PaimaStudios/paima-portal</a></li>
+<li class="">Original repository (preserved for reference): <a href="https://github.com/PaimaStudios/paima-preorder" target="_blank" rel="noopener noreferrer" class="">https://github.com/PaimaStudios/paima-preorder</a></li>
+</ul>]]></content>
+        <author>
+            <name>EffectStream</name>
+            <uri>https://github.com/effectstream</uri>
+        </author>
+        <category label="launchpad" term="launchpad"/>
+        <category label="presale" term="presale"/>
+        <category label="preorder" term="preorder"/>
+        <category label="cardano" term="cardano"/>
+        <category label="utxorpc" term="utxorpc"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Card Payments for On-Chain Games: The Effectstream payment-app Template]]></title>
         <id>https://effectstream.github.io/docs/blog/payment-app</id>
