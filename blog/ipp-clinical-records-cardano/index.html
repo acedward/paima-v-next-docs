@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.0">
+<title data-rh="true">IPP: Verifiable Clinical Records on Cardano, Built on EffectStream | EffectStream</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://effectstream.github.io/docs/img/no-image.png"><meta data-rh="true" name="twitter:image" content="https://effectstream.github.io/docs/img/no-image.png"><meta data-rh="true" property="og:url" content="https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="IPP: Verifiable Clinical Records on Cardano, Built on EffectStream | EffectStream"><meta data-rh="true" name="description" content="Medical records are an area that can gain from blockchain, but it hasn&#x27;t been"><meta data-rh="true" property="og:description" content="Medical records are an area that can gain from blockchain, but it hasn&#x27;t been"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-06-16T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/effectstream"><meta data-rh="true" property="article:tag" content="cardano,privacy,healthcare,templates,ios,testnet"><link data-rh="true" rel="icon" href="/docs/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano"><link data-rh="true" rel="alternate" href="https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano" hreflang="en"><link data-rh="true" rel="alternate" href="https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano","mainEntityOfPage":"https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano","url":"https://effectstream.github.io/docs/blog/ipp-clinical-records-cardano","headline":"IPP: Verifiable Clinical Records on Cardano, Built on EffectStream","name":"IPP: Verifiable Clinical Records on Cardano, Built on EffectStream","description":"Medical records are an area that can gain from blockchain, but it hasn't been","datePublished":"2026-06-16T00:00:00.000Z","author":{"@type":"Person","name":"EffectStream","url":"https://github.com/effectstream"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://effectstream.github.io/docs/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/docs/blog/rss.xml" title="EffectStream RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/docs/blog/atom.xml" title="EffectStream Atom Feed">
+
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="/docs/learn-compact-with-games/rss.xml" title="EffectStream RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/docs/learn-compact-with-games/atom.xml" title="EffectStream Atom Feed">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.376be925.css">
+<script src="/docs/assets/js/runtime~main.0b3ccf98.js" defer="defer"></script>
+<script src="/docs/assets/js/main.65071ed4.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","dark"),document.documentElement.setAttribute("data-theme-choice","dark"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/docs/img/favicon.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" target="_self" href="/docs/"><div class="navbar__logo"><img src="/docs/img/favicon.svg" alt="EffectStream logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/docs/img/favicon.svg" alt="EffectStream logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/">Docs</a><a class="navbar__item navbar__link" href="/docs/scaffold-with-ai">Scaffold with AI</a><a class="navbar__item navbar__link" href="/docs/learn-compact-with-games">Learn Compact with Games</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_pO2u margin-bottom--md">All posts</div><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/docs/blog/ipp-clinical-records-cardano">IPP: Verifiable Clinical Records on Cardano, Built on EffectStream</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/wallets-biometric-passkeys">Frictionless Wallets, Part 3: Biometric Login with Passkeys</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/wallets-social-login-2of3">Frictionless Wallets, Part 2: Social Login with a 2-of-3 Secret</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/cardano-presale-launchpad">A Cardano Presale, Part 2: Clone, Publish, Launch the App</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/wallets-device-key-pairs">Frictionless Wallets, Part 1: Device-Specific Key-Pairs</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/payment-app">Card Payments for On-Chain Games: The Effectstream payment-app Template</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/farcaster-app">Inside farcaster-canvas: A Farcaster Mini App as an EffectStream Indexer</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/achievement-system">An Open Achievement Standard for On-Chain Games</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/auto-sign">Auto-Sign: Eliminating Wallet Pop-ups for Real-Time Applications</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/celestia-data-availability">Data Availability with Celestia: High-Throughput On-Chain Applications</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/cardano-onchain-preorder-validator">A Presale Contract on Cardano: On-Chain Purchase Receipts</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/cardano-primitives">Cardano Primitives: From Indexer Tasks to First-Class Chain Events</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/data-availability-part-2">Data Availability Part 2: When to Use a DA Layer, and How to Index What You Posted</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/engine-integrations">Engine Integrations: From Local Development to Mobile</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/game-templates">Game Template Library: On-Chain Game Patterns for Every Chain</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/mina-zk-integration">Cross-Chain Privacy: Midnight + Cardano Zero-Knowledge Integration</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/nft-launchpad">Building a Cross-Chain NFT Launchpad</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/projected-nfts">Projected NFTs: Using Cardano NFTs in Smart Contract Applications</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/stakepool-delegation-batcher">Stake Pool Delegation Part 3: Building a Pool-Aware Batcher</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/stakepool-delegation-midnight">Stake Pool Delegation Part 4: Stake Pools as Chain Validators</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/stakepool-delegation-technical">Stake Pool Delegation Part 2: Building a Delegation State Machine</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/stakepool-delegation">Stake Pool Delegation Part 1: Connecting Cardano SPOs to On-Chain Applications</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/docs/blog/user-experience-integrations">AI-Powered Gameplay: Integrating Deterministic LLMs with On-Chain Games</a></li></ul></nav></aside><main class="col col--7"><article class=""><header><h1 class="title_f1Hy">IPP: Verifiable Clinical Records on Cardano, Built on EffectStream</h1><div class="margin-vert--md" style="font-size:0.9rem">17 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--12 authorCol_Hf19"><div class="avatar margin-bottom--sm"><div class="avatar__intro authorDetails_lV9A"><div class="avatar__name"><a href="https://github.com/effectstream" target="_blank" rel="noopener noreferrer"><span class="authorName_yefp" translate="no">EffectStream</span></a></div><div class="authorSocials_rSDt"></div></div></div></div></div></header><div id="__blog-post-container" class="markdown"><p>Medical records are an area that can gain from blockchain, but it hasn&#x27;t been
+done at scale yet - so we wanted to start with small wins. The data itself - a
+patient&#x27;s history, diagnoses, contact details - must stay private. But everyone
+who relies on it - the clinician next month, an auditor, the researcher who wants
+to publish from it - needs to know it hasn&#x27;t been silently rewritten. Privacy
+<em>and</em> verifiability, with neither one cancelling the other out.</p>
+<p><strong>IPP</strong> is a working application that puts that combination on Cardano,
+end-to-end: an iOS app for Chilean doctors and clinical staff to capture
+women&#x27;s-health intake forms, a Bun backend, a public web viewer, and a Cardano
+anchor that records a hash of each chart on chain. It&#x27;s built on Cardano with
+tooling from EffectStream for local development, and is open-source at
+<a href="https://github.com/effectstream/ipp-app" target="_blank" rel="noopener noreferrer" class=""><code>effectstream/ipp-app</code></a>.</p>
+<p>It is also the first <em>native-mobile, location-based</em> template in the
+EffectStream series. This one is a field tool clinicians carry in their
+pocket, and also a social game, with leaderboard scoring.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-problem">The problem<a href="#the-problem" class="hash-link" aria-label="Direct link to The problem" title="Direct link to The problem" translate="no">​</a></h2>
+<p>Behind the cryptography is a concrete clinical bottleneck. In Chile:</p>
+<ul>
+<li class=""><strong>2,000+ (known) people are on the waiting list</strong> for pelvic-floor care.</li>
+<li class=""><strong>There are not enough specialists</strong> to see them.</li>
+<li class=""><strong>Triage is expensive</strong> - scarce specialist time is spent sorting who needs what
+before anyone is treated.</li>
+<li class=""><strong>The data never becomes research.</strong> Cases are seen and forgotten; there is no
+dataset a clinician could publish from.</li>
+</ul>
+<p>And the tools that exist do not close the gap:</p>
+<ul>
+<li class=""><strong>Today&#x27;s systems only store.</strong> They are filing cabinets - they hold a record,
+but they do not help you trust it, act on it, or learn from it.</li>
+<li class=""><strong>No geo-location.</strong> Nothing shows <em>where</em> the need concentrates, so scarce
+specialists cannot be sent where they would help most.</li>
+<li class=""><strong>No way to explore augmented data.</strong> A clinician filling a form sees a blank
+field, never how this patient compares to their locality, country, or the world.</li>
+</ul>
+<p>IPP attacks exactly these gaps, and each maps to a feature:</p>
+<ul>
+<li class=""><strong>Cheaper triage, by more hands.</strong> A structured, guided intake turns an
+expensive specialist task into a quick form - in the pilot, doctors even
+delegated logins to office staff to capture cases by phone.</li>
+<li class=""><strong>Location is first-class (GPS).</strong> Every record geocodes, so the map shows where
+need clusters and lets you plan interventions: &quot;send a specialist to this zone.&quot;</li>
+<li class=""><strong>Augmented data (AR for data).</strong> At capture, each field shows the local / country /
+world context; on the map, notes and areas turn patterns into plans.</li>
+<li class=""><strong>Capture becomes verifiable research.</strong> A filtered cohort is anchored to Cardano
+as a study whose dataset anyone can validate - the data finally has somewhere to
+go.</li>
+<li class=""><strong>Gamified so it grows.</strong> Points and a leaderboard make contribution visible and
+reward the clinicians who feed the dataset (and who write the papers).</li>
+</ul>
+<p>The rest of this post is how that is built - and what happened when real doctors
+used it.</p>
+<div>Loading diagram...</div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="gamification">Gamification<a href="#gamification" class="hash-link" aria-label="Direct link to Gamification" title="Direct link to Gamification" translate="no">​</a></h2>
+<p>Games come in many shapes, medias and types. We are introducing a real world op-in work into a gameified leaderboard. For example, a clinician earn points for each record they capture, and the leaderboard tracks the top contributors. This is has multiple benefits:</p>
+<ul>
+<li class="">It creates a sense of ownership and pride in the work they are doing.</li>
+<li class="">Social proof that their work is valued and contributing to a larger cause.</li>
+<li class="">Showcase the community and collaboration.</li>
+<li class="">You can see the data is clean, as top contributors will probably be well known and trusted.</li>
+<li class="">Helps showing the app is alive.</li>
+<li class="">Keeps it fun!</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="IPP iOS app - the contributor leaderboard ranking clinicians by points contributed" src="/docs/assets/images/ipp-leaderboard-1e9f5775a950a9b1d501436d182e1792.png" width="954" height="1727" class="img_ev3q">
+<em>The built-in leaderboard: points per contributor - in the pilot, the signal of
+who the research-minded (and willing-to-pay) clinicians are.</em></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-trust-gap">The trust gap<a href="#the-trust-gap" class="hash-link" aria-label="Direct link to The trust gap" title="Direct link to The trust gap" translate="no">​</a></h2>
+<p>A clinical intake form has roughly seventy questions across four sections -
+demographic data, general medical history, gynecological history, and
+pelvic-floor assessment, in this case. Each filled-out form lives in more than
+one place at once:</p>
+<ul>
+<li class=""><strong>On the doctor&#x27;s phone</strong>, where it&#x27;s captured.</li>
+<li class=""><strong>In a shared database</strong>, where clinicians look it up later.</li>
+<li class=""><strong>In a published dataset</strong>, when the cohort becomes research.</li>
+</ul>
+<p>(Patients can request their own record too - that&#x27;s available, just not the focus
+here.)</p>
+<p>The challenge isn&#x27;t storage - Postgres is perfectly happy to hold a JSONB column.
+The challenge is <em>trust</em>. If a record changes between visits, nobody downstream
+can tell. If a doctor needs to prove to an auditor - or a journal - that the
+record they&#x27;re reading today is the one they saved in March, there&#x27;s no built-in
+mechanism; the row is just bytes controlled by whoever holds the connection
+string.</p>
+<p>The anchor pattern fixes that without putting any private data on chain.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-anchor-pattern">The anchor pattern<a href="#the-anchor-pattern" class="hash-link" aria-label="Direct link to The anchor pattern" title="Direct link to The anchor pattern" translate="no">​</a></h2>
+<p>On Cardano you don&#x27;t need a smart contract to anchor a hash - you attach it to
+<strong>transaction metadata</strong>. IPP submits a tiny self-payment transaction carrying a
+metadata label (<code>8327</code>) with three fields:</p>
+<div class="language-jsonc codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-jsonc codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token plain">// tx metadata, label 8327</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">{</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">  &quot;t&quot;: &quot;ipp&quot;,                                  // kind: &quot;ipp&quot; record | &quot;ipp-study&quot; Merkle root</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">  &quot;k&quot;: &quot;&lt;SHA-256(rut)&gt;&quot;,                       // who, hashed - never identifiable data</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">  &quot;v&quot;: &quot;&lt;SHA-256(canonical patient JSON)&gt;&quot;     // the record, hashed</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>Nothing about the patient&#x27;s identity or medical content is recoverable from the
+chain entry - both <code>k</code> and <code>v</code> are 32-byte hashes. But given the plaintext
+record, anyone can recompute <code>SHA-256(canonical JSON)</code>, find the latest anchor
+for <code>SHA-256(rut)</code>, and check the two match. If they don&#x27;t, the record changed
+since it was anchored. This is Cardano&#x27;s own
+<a href="https://cips.cardano.org/cip/CIP-0100" target="_blank" rel="noopener noreferrer" class="">CIP-100</a> &quot;anchor&quot; convention - a
+rootHash written on chain to attest off-chain data - applied to clinical charts.</p>
+<p>The same shape scales up: a <em>study</em> anchors one Merkle root over a whole cohort
+of record hashes (<code>t: &quot;ipp-study&quot;</code>), so a published dataset can be validated
+against a single on-chain value without ever putting the records on chain.</p>
+<p>On a recent end-to-end run:</p>
+<table><thead><tr><th>Stage</th><th>Result</th></tr></thead><tbody><tr><td><code>CardanoAdapter.submit</code> → Lucid builds tx + metadata</td><td>submitted to the Cardano node</td></tr><tr><td>Cardano</td><td>tx confirmed in seconds</td></tr><tr><td>chain sync → <code>CardanoTransfer</code> primitive → state machine</td><td>row written to <code>ipp_anchors</code></td></tr><tr><td><code>CardanoAdapter.read</code> / <code>GET /api/v1/onchain/:key</code></td><td>returns the on-chain value - matches the submitted hash</td></tr></tbody></table>
+<p>A metadata transaction costs a fraction of an ada.</p>
+<p><img decoding="async" loading="lazy" alt="IPP iOS app - a record saved and anchored to Cardano" src="/docs/assets/images/ipp-anchor-saved-adce6975b14690b1698eb62c3bb7587d.png" width="1468" height="1028" class="img_ev3q">
+<em>Saving a record in the app returns an access code and anchors the record&#x27;s
+SHA-256 hash to Cardano - the transaction id is shown right there.</em></p>
+<p><img decoding="async" loading="lazy" alt="IPP web viewer - exported studies, each verifiable on Cardano" src="/docs/assets/images/ipp-verifiable-studies-d7ec213e3822ce481d582feb6c1c2fb2.png" width="1468" height="1028" class="img_ev3q">
+<em>Exported studies, each a cohort: the on-chain column links every study to its
+Cardano anchor, so anyone can verify a downloaded dataset against the chain.</em></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-effectstream-made-the-rest-disappear">How EffectStream made the rest disappear<a href="#how-effectstream-made-the-rest-disappear" class="hash-link" aria-label="Direct link to How EffectStream made the rest disappear" title="Direct link to How EffectStream made the rest disappear" translate="no">​</a></h2>
+<p>The interesting part isn&#x27;t submitting a transaction - it&#x27;s <em>reading chain state
+back as application state</em>. EffectStream does that with one command and a few
+lines of glue:</p>
+<ul>
+<li class=""><strong>Local dev is one command.</strong> <code>cd cardano &amp;&amp; bun run dev</code> brings up a local
+Cardano node + faucet, an indexer, a local database, and the sync node -
+everything runs on a single machine for development.</li>
+<li class=""><strong>A primitive turns chain data into rows.</strong> EffectStream&#x27;s <code>CardanoTransfer</code>
+primitive streams each transaction&#x27;s metadata; a ~15-line state-machine
+transition filters for label <code>8327</code> and writes <code>{ tx, kind, k, v, block }</code>
+into an <code>ipp_anchors</code> table.</li>
+<li class=""><strong>The app reads a table, not the chain.</strong> Verification - <code>GET /verify/:rut</code> and
+the map&#x27;s &quot;Verify on chain&quot; popup - just queries <code>ipp_anchors</code>. The chain
+is the source of truth; the synced table is the always-available read model.</li>
+</ul>
+<p>The backend&#x27;s <code>CardanoAdapter</code>
+(<a href="https://github.com/effectstream/ipp-app/blob/main/backend/src/adapters/cardano.ts" target="_blank" rel="noopener noreferrer" class=""><code>backend/src/adapters/cardano.ts</code></a>)
+is under 120 lines and only knows two things: how to build a metadata
+transaction with <a href="https://github.com/Anastasia-Labs/lucid-evolution" target="_blank" rel="noopener noreferrer" class="">Lucid</a>, and
+how to read <code>ipp_anchors</code>. Flip <code>CHAIN=cardano</code> in <code>backend/.env</code> and the same
+endpoints that ran against a no-op <code>local</code> adapter now anchor and verify on a
+real chain - no endpoint changes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-new-use-cases-does-the-gps-and-ar-integration-enable">What New Use-Cases Does the GPS and AR Integration Enable<a href="#what-new-use-cases-does-the-gps-and-ar-integration-enable" class="hash-link" aria-label="Direct link to What New Use-Cases Does the GPS and AR Integration Enable" title="Direct link to What New Use-Cases Does the GPS and AR Integration Enable" translate="no">​</a></h2>
+<p>Putting location and augmentation at the centre of clinical capture unlocks
+things a filing-cabinet records system simply cannot:</p>
+<ul>
+<li class=""><strong>Route scarce specialists to where the need is.</strong> Because every record
+geocodes (GPS), the map shows where pelvic-floor need <em>clusters</em> - not just
+that it exists. A health service can look at a region and decide &quot;send a
+specialist to this zone.&quot; That planning was impossible when cases lived on
+paper in separate clinics.</li>
+<li class=""><strong>Context at the point of care (augmented data - &quot;AR for data&quot;).</strong> As a
+clinician fills a field, the app shows how this patient compares to their
+<em>local</em> area, their <em>country</em>, and the <em>world</em> - so a blank field becomes a
+field with meaning. On the map, clinicians draw notes and areas, turning raw
+points into an intervention plan.</li>
+<li class=""><strong>Capture that becomes verifiable research.</strong> A filtered cohort is anchored
+to Cardano as a study (one Merkle root), so the data a clinician gathers can
+finally go somewhere - a dataset a journal or co-author can validate without
+ever seeing a private record.</li>
+<li class=""><strong>Cheaper triage, by more hands.</strong> A guided, location-aware intake turns an
+expensive specialist task into a quick structured form, so non-specialist
+staff can capture cases and scarce specialist time goes to treatment.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="IPP web viewer - anonymized pelvic-floor records as a geographic density layer" src="/docs/assets/images/ipp-density-map-539de2f18404ab213398cb8bf899014a.png" width="1468" height="1028" class="img_ev3q">
+<em>The web viewer&#x27;s map: records as a geographic density layer over the region,
+with clinician-drawn notes and areas - so you can see where need concentrates.</em></p>
+<p><img decoding="async" loading="lazy" alt="IPP iOS capture form - each field shows the local, country and world average beneath it" src="/docs/assets/images/ipp-augmented-data-f3505f305de7a0b5cf8be228c78db695.png" width="560" height="945" class="img_ev3q">
+<em>Augmented data at capture: under each field, the app shows the average value
+for the patient&#x27;s locality, country, and the world. It is subtle but powerful -
+the clinician instantly sees how this patient compares to local norms, and
+weighing each value against its context makes data-entry errors far less likely.</em></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-we-prioritized-gps-and-ar-integration-for-ios">Why We Prioritized GPS and AR Integration for iOS<a href="#why-we-prioritized-gps-and-ar-integration-for-ios" class="hash-link" aria-label="Direct link to Why We Prioritized GPS and AR Integration for iOS" title="Direct link to Why We Prioritized GPS and AR Integration for iOS" translate="no">​</a></h2>
+<p>Three deliberate choices, each driven by the clinic, not the spec:</p>
+<ul>
+<li class=""><strong>Why GPS.</strong> Pelvic-floor need is unevenly distributed and the specialists
+who treat it are scarce. Without location you can only count cases; with it
+you can <em>route care</em>. Geo-location is the difference between a list and a
+plan.</li>
+<li class=""><strong>Why augmented data (&quot;AR for data&quot;).</strong> The hard part of an intake form is
+not storing the answer - it is knowing whether the answer is unusual. Showing
+the local / country / world average beneath each field does two things at
+once: it gives the clinician an instant sense of the norm for that location,
+and it cuts data-entry errors, because a value that is off compared to its
+context makes you stop and check. The paper form could never do that.</li>
+<li class=""><strong>Why iOS.</strong> Every clinician and non-medical professional in the pilot already
+carried an iPhone, so iOS was the fastest path to real hands-on use and the
+only platform we needed to target. The app ships signed requests, an embedded
+web dashboard, and a deterministic per-account wallet.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-the-field-a-closed-testnet-in-chile">From the field: a closed testnet in Chile<a href="#from-the-field-a-closed-testnet-in-chile" class="hash-link" aria-label="Direct link to From the field: a closed testnet in Chile" title="Direct link to From the field: a closed testnet in Chile" translate="no">​</a></h2>
+<p>The testnet existed to answer one question: <strong>would clinicians actually use this,
+or is it just a nice demo?</strong> The answer was a clear yes - and that yes is the
+result that mattered most.</p>
+<p>The form, the fields, and the priorities did not come from a spec - they came
+from doctors. We ran a closed pilot in three neighbouring cities in Chile with
+practising clinicians who needed exactly this tool and who gave us the
+requirements and hints that shaped it. The women&#x27;s-health and pelvic-floor
+instruments in the app are theirs. We deployed it the simplest way possible - by
+hand, installing the app on each doctor&#x27;s own iPhone. Every one of them already
+carried one, so iOS was the right (and only) target.</p>
+<p>After a few weeks of real use, the pilot worked: the app helped <strong>triage
+patients</strong>, and it was used actively because the data it gathered was genuinely
+useful day to day - not a demo, a working instrument.</p>
+<iframe width="100%" height="415" src="https://www.youtube.com/embed/xXFLuPrNzjc" title="IPP app walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+<p><em>A walkthrough of the IPP app - capturing a record, anchoring its hash to Cardano, and exploring the geographic density map.</em></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-the-clinicians-said">What the clinicians said<a href="#what-the-clinicians-said" class="hash-link" aria-label="Direct link to What the clinicians said" title="Direct link to What the clinicians said" translate="no">​</a></h3>
+<p>These summarize the feedback clinicians commonly gave us:</p>
+<ul>
+<li class="">&quot;It has helped me skip reviewing documents just to triage.&quot;</li>
+<li class="">&quot;I needed to add a question, and I could add it myself.&quot;</li>
+<li class="">&quot;I could delegate the first quick review to other non-medical professionals.&quot;</li>
+<li class="">&quot;We midwives are usually the first to see these patients, and having validated questions helps.&quot;</li>
+<li class="">&quot;For the first time, we are seeing the data add up without manual labor.&quot;</li>
+</ul>
+<p>A few things we learned that no amount of planning would have surfaced:</p>
+<ul>
+<li class=""><strong>Doctors asked to add other people.</strong> Doctors wanted to sign up non-medical
+staff so they could phone patients and fill the form on their behalf. The
+single-doctor login model didn&#x27;t match how a clinic actually runs - a clear
+signal for delegated / role-based access next. Also an open registry.</li>
+<li class=""><strong>Almost all the feedback was about fields</strong> - which questions to add, drop, or
+reword. We need to make them resolve this, as we are not medical experts. That is exactly the case the <strong>schema-driven form</strong> was built for: we
+changed the questionnaire live from the web &quot;Configure&quot; tab, with no App Store
+release, and the change reached every device on next launch.</li>
+<li class=""><strong>They were happy and proactive.</strong> Adoption wasn&#x27;t a push - clinicians kept
+asking for changes because they wanted to keep using it.</li>
+<li class=""><strong>The open question is who pays.</strong> They liked it; pushing it top-down into
+hospitals is hard. When we asked about willingness to pay, the clinicians who
+wanted to do research and publish papers were comfortable with a subscription -
+the same people the gamified leaderboard already rewards. That points the
+business model at the researchers, not the hospital procurement office.</li>
+</ul>
+<p>One deliberate constraint: we anchored to a <strong>private Cardano testnet</strong>,
+not a public network. Chile&#x27;s rules for what health-derived data may be committed
+to a public blockchain are something we are still working through with local law,
+so we kept the anchors on a network we control while that review continues. The
+architecture makes this a non-event - only <strong>hashes</strong> ever reach the chain (never
+a RUT or a record), and the swappable <code>ChainAdapter</code> means moving from the private
+testnet to a public Cardano network is a configuration change, not a rewrite, the
+day the legal picture is clear.</p>
+<p>The bigger takeaway outlived the pilot: there is a large, underserved space for
+<strong>low-cost tools in medicine</strong>, and where one actually shows up, the demand is
+real. The hard part was never the app - it is the <strong>compliance surface</strong> around
+health data. What makes that tractable is the shape of the legislation in
+countries like Chile, where a small team can ship something genuinely compliant
+and useful without the cost structure that keeps this kind of tool out of reach
+elsewhere. The privacy-preserving anchor - hashes on chain, records never - is
+part of how a low-cost tool stays on the right side of that line.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-next">What&#x27;s next<a href="#whats-next" class="hash-link" aria-label="Direct link to What&#x27;s next" title="Direct link to What&#x27;s next" translate="no">​</a></h2>
+<p>The pilot pointed at clear next moves:</p>
+<ul>
+<li class=""><strong>Delegated, role-based access.</strong> Different users need different views, so the
+next version makes that first-class: a clinic account with per-person roles, so
+whoever phones the patient isn&#x27;t borrowing the doctor&#x27;s identity.</li>
+<li class=""><strong>From a private testnet to a public chain.</strong> The anchor design already keeps
+only hashes on chain, so going public is a configuration flip - gated on
+finishing the review of what Chilean law allows on a public ledger.</li>
+<li class=""><strong>Publishable proof bundles.</strong> Turn a filtered cohort into a downloadable
+proof - a Merkle root plus per-record inclusion proofs - so a journal or
+co-author can verify a dataset against the chain without trusting us or seeing
+a single private record.</li>
+<li class=""><strong>A subscription for the people who publish.</strong> Willingness to pay was clearest
+among the research-minded clinicians, so the business model follows them, with
+the leaderboard doubling as the signal of who those power users are.</li>
+<li class=""><strong>Wider rollout, more instruments.</strong> More cities and clinics, and beyond
+pelvic-floor into other intake forms - the schema-driven form makes a new
+questionnaire a configuration change, not a new app.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-use-it-yourself">How to use it yourself<a href="#how-to-use-it-yourself" class="hash-link" aria-label="Direct link to How to use it yourself" title="Direct link to How to use it yourself" translate="no">​</a></h2>
+<p>IPP is intentionally thin - clone it (see <a href="#try-it" class="">Try it</a>) and most of the
+surface generalizes. The pieces worth lifting:</p>
+<ul>
+<li class=""><strong>The iOS app.</strong> A SwiftUI app whose form is <em>schema-driven</em>: four tabs and
+~70 questions rendered from a server-side JSON schema, so you add / reorder /
+relabel questions with no App Store release. Signed requests, an embedded web
+dashboard, and a deterministic per-account wallet come with it.</li>
+<li class=""><strong>GPS + augmented data (AR for data).</strong> CoreLocation geocoding feeds a Leaflet
+population map with stat filters and a distance radius; at capture each field
+shows local / country / world context, and on the map you draw notes and areas to
+plan interventions. The whole location-plus-augmentation layer drops into any
+field-data app.</li>
+<li class=""><strong>Gamification.</strong> Points and a leaderboard as a social-regulation and incentive
+layer - reusable anywhere you need contributors to keep feeding a dataset (and,
+as the pilot showed, to surface who your paying users are).</li>
+<li class=""><strong>The metadata-anchor pattern.</strong> A label plus <code>{ t, k, v }</code> is the smallest
+useful Cardano anchor for any &quot;I have private data, I want to prove it hasn&#x27;t
+changed&quot; application. No contract required.</li>
+<li class=""><strong>The primitive → table sync.</strong> The <code>CardanoTransfer</code> primitive + a tiny state
+transition is a clean template for <em>any</em> &quot;watch chain metadata, project it into
+an app table&quot; use case.</li>
+<li class=""><strong>The schema-driven form.</strong> The questionnaire is a JSON schema stored in
+Postgres, fetched and cached by both clients; any vertical that needs a
+configurable intake form - surveys, audits, field inspections - can drop it in.</li>
+<li class=""><strong>The mock-wallet derivation.</strong> Each demo account derives a deterministic
+Cardano-style address from username + password, identical byte-for-byte between
+Swift and TypeScript. A teaching aid, not a security primitive.</li>
+</ul>
+<p>The code is open-source; PRs against the <a href="https://github.com/effectstream/ipp-app" target="_blank" rel="noopener noreferrer" class="">demo repo</a>
+are welcome.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-this-matters">Why this matters<a href="#why-this-matters" class="hash-link" aria-label="Direct link to Why this matters" title="Direct link to Why this matters" translate="no">​</a></h2>
+<p>Privacy-preserving verifiability is one of those phrases that sounds abstract
+until a real record is in front of you. Health data is one of the cleanest
+examples - the data itself must stay private, but the guarantee that it hasn&#x27;t
+been silently edited is the difference between a record and a story.</p>
+<p>EffectStream&#x27;s job here is to make that combination cheap to assemble. The
+interesting work in IPP is the SwiftUI form, the Chilean clinical instruments,
+and the schema editor - the parts specific to <em>this</em> application. The Cardano
+stack underneath is a metadata transaction, one sync primitive, and an
+orchestrator command. That ratio is the point.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="try-it">Try it<a href="#try-it" class="hash-link" aria-label="Direct link to Try it" title="Direct link to Try it" translate="no">​</a></h2>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token function" style="color:rgb(80, 250, 123)">git</span><span class="token plain"> clone https://github.com/effectstream/ipp-app</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> ipp-app</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)"># Cardano - local node + indexer + sync node, all on one machine</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> cardano </span><span class="token operator">&amp;&amp;</span><span class="token plain"> bun </span><span class="token function" style="color:rgb(80, 250, 123)">install</span><span class="token plain"> </span><span class="token operator">&amp;&amp;</span><span class="token plain"> bun run dev</span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)"># Backend (separate terminal)</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">..</span><span class="token plain">/backend </span><span class="token operator">&amp;&amp;</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">cp</span><span class="token plain"> .env.example .env   </span><span class="token comment" style="color:rgb(98, 114, 164)"># set DATABASE_URL; CHAIN=cardano</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain">bun </span><span class="token function" style="color:rgb(80, 250, 123)">install</span><span class="token plain"> </span><span class="token operator">&amp;&amp;</span><span class="token plain"> bun run dev               </span><span class="token comment" style="color:rgb(98, 114, 164)"># http://localhost:3334</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)"># Web viewer (separate terminal)</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">..</span><span class="token plain">/web </span><span class="token operator">&amp;&amp;</span><span class="token plain"> bun </span><span class="token function" style="color:rgb(80, 250, 123)">install</span><span class="token plain"> </span><span class="token operator">&amp;&amp;</span><span class="token plain"> bun run dev   </span><span class="token comment" style="color:rgb(98, 114, 164)"># http://localhost:5174</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)"># iOS app</span><span class="token plain"></span><br></div><div class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token builtin class-name" style="color:rgb(189, 147, 249)">cd</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">..</span><span class="token plain">/ios </span><span class="token operator">&amp;&amp;</span><span class="token plain"> xcodegen generate </span><span class="token operator">&amp;&amp;</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">open</span><span class="token plain"> IPP.xcodeproj</span><br></div></code></pre></div></div>
+<p>Anchored records show up in <code>ipp_anchors</code> with a real Cardano <code>tx_id</code>. The
+patient&#x27;s RUT and record stay off-chain; only their hashes ever touch the chain.</p>
+<blockquote>
+<p>NOTE: All data is shown in videos and images are synthetic. Real patient, or physician names are non-public due to legal requirements.</p>
+</blockquote></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/cardano">cardano</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/privacy">privacy</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/healthcare">healthcare</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/templates">templates</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/ios">ios</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/blog/tags/testnet">testnet</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--next" href="/docs/blog/wallets-biometric-passkeys"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Frictionless Wallets, Part 3: Biometric Login with Passkeys</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#the-problem" class="table-of-contents__link toc-highlight">The problem</a></li><li><a href="#gamification" class="table-of-contents__link toc-highlight">Gamification</a></li><li><a href="#the-trust-gap" class="table-of-contents__link toc-highlight">The trust gap</a></li><li><a href="#the-anchor-pattern" class="table-of-contents__link toc-highlight">The anchor pattern</a></li><li><a href="#how-effectstream-made-the-rest-disappear" class="table-of-contents__link toc-highlight">How EffectStream made the rest disappear</a></li><li><a href="#what-new-use-cases-does-the-gps-and-ar-integration-enable" class="table-of-contents__link toc-highlight">What New Use-Cases Does the GPS and AR Integration Enable</a></li><li><a href="#why-we-prioritized-gps-and-ar-integration-for-ios" class="table-of-contents__link toc-highlight">Why We Prioritized GPS and AR Integration for iOS</a></li><li><a href="#from-the-field-a-closed-testnet-in-chile" class="table-of-contents__link toc-highlight">From the field: a closed testnet in Chile</a><ul><li><a href="#what-the-clinicians-said" class="table-of-contents__link toc-highlight">What the clinicians said</a></li></ul></li><li><a href="#whats-next" class="table-of-contents__link toc-highlight">What&#39;s next</a></li><li><a href="#how-to-use-it-yourself" class="table-of-contents__link toc-highlight">How to use it yourself</a></li><li><a href="#why-this-matters" class="table-of-contents__link toc-highlight">Why this matters</a></li><li><a href="#try-it" class="table-of-contents__link toc-highlight">Try it</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
