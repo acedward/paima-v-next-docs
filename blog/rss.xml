@@ -68,7 +68,7 @@
 <p>The orchestrator boots PGLite + the local chain + the node + the frontend in one command. For Cardano, apply the config diff above and <code>bun run dev</code> switches to YACI DevKit + Dolos automatically. Open <code>http://localhost:10599</code>, connect the ephemeral wallet, hit the faucet, and vote.</p>
 <p>The <code>farcaster-canvas</code> template and this poll are both at <a href="https://github.com/effectstream/farcaster-app" target="_blank" rel="noopener noreferrer" class="">https://github.com/effectstream/farcaster-app</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="video-walkthrough">Video walkthrough<a href="https://effectstream.github.io/docs/blog/farcaster-template#video-walkthrough" class="hash-link" aria-label="Direct link to Video walkthrough" title="Direct link to Video walkthrough" translate="no">​</a></h2>
-<p><a href="https://youtu.be/dveSIwH_EFY" target="_blank" rel="noopener noreferrer" class="">https://youtu.be/dveSIwH_EFY</a></p>]]></content:encoded>
+<iframe width="100%" style="aspect-ratio:16/9;border:0;border-radius:8px;margin-top:8px" src="https://www.youtube.com/embed/dveSIwH_EFY" title="Movie of the Year Poll - Cardano + EffectStream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>]]></content:encoded>
             <category>farcaster</category>
             <category>mini-apps</category>
             <category>game-templates</category>
