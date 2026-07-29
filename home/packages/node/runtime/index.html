@@ -17,8 +17,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><link rel="stylesheet" href="/docs/assets/css/styles.376be925.css">
-<script src="/docs/assets/js/runtime~main.b40922a8.js" defer="defer"></script>
-<script src="/docs/assets/js/main.60243c28.js" defer="defer"></script>
+<script src="/docs/assets/js/runtime~main.2349bca6.js" defer="defer"></script>
+<script src="/docs/assets/js/main.19b45fbd.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -64,6 +64,40 @@ integrations or queries itself, but every other node package only gets
 exercised when this loop is running. The <code>StartConfig</code> shape determines
 which DB migrations apply, which state machines fire, and whether the
 runtime exposes a Fastify router.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="empty-block-coalescing-catch-up">Empty-block coalescing (catch-up)<a href="#empty-block-coalescing-catch-up" class="hash-link" aria-label="Direct link to Empty-block coalescing (catch-up)" title="Direct link to Empty-block coalescing (catch-up)" translate="no">​</a></h2>
+<p>The runtime replays one Effectstream block per main-clock tick, each in its
+own DB transaction. During a deep catch-up over an idle gap (e.g. an NTP main
+chain at one block/second across days), most of those blocks are <strong>empty</strong> - no
+on-chain content, no scheduled input, no migration - yet still cost a full
+<code>BEGIN…COMMIT</code> round-trip.
+Empty-block coalescing folds a run of consecutive empty blocks into a <strong>single
+transaction</strong> that writes only the run&#x27;s endpoint. It is <strong>opt-in</strong> and off by
+default:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">EFFECTSTREAM_COALESCE_EMPTY_BLOCKS</span><span class="token operator">=</span><span class="token plain">true</span><br></div></code></pre></div></div>
+<p>The lag threshold that defines &quot;behind the chain tip&quot; defaults to <strong>20× the
+main clock&#x27;s block time</strong> (falling back to 60 s when no <code>blockTimeMS</code> is
+exposed by the network config). Override it with
+<code>EFFECTSTREAM_LAG_THRESHOLD_MS</code> (milliseconds), e.g. for chains whose main
+clock fires faster than the runtime can keep up with one transaction per block:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#F8F8F2"><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">EFFECTSTREAM_LAG_THRESHOLD_MS</span><span class="token operator">=</span><span class="token number">30000</span><span class="token plain">   </span><span class="token comment" style="color:rgb(98, 114, 164)"># engage coalescing past 30 s of lag</span><br></div></code></pre></div></div>
+<p>Behavior and guarantees:</p>
+<ul>
+<li class=""><strong>Catch-up only.</strong> Coalescing engages only while behind the chain tip
+(<code>now - block.timestamp</code> greater than the lag threshold) and disengages at
+the tip, so steady-state stays one block per transaction.</li>
+<li class=""><strong>Identical database.</strong> A coalesced sync produces a byte-for-byte identical
+database to a non-coalesced one. Empty blocks already never advance the block
+hash or RNG seed, so only the endpoint&#x27;s block row and the per-protocol resume
+watermark are written - exactly as the normal path would leave them.</li>
+<li class=""><strong>Never skips work.</strong> A run is flushed before any block that has on-chain
+content, a migration at its height, or a due block-height/timestamp-scheduled
+input - so nothing that mutates state is ever folded away.</li>
+<li class=""><strong>Tip stays visible.</strong> If the producer goes quiet on an empty tail, the run is
+flushed on a short idle timeout so the latest height still commits.</li>
+<li class="">A run is also capped (<code>MAX_EMPTY_RUN</code>) to bound transaction size and recovery.</li>
+</ul>
+<p>Implementation: <a href="https://github.com/effectstream/effectstream/blob/main/packages/node-sdk/runtime/src/coalesce.ts" target="_blank" rel="noopener noreferrer" class=""><code>src/coalesce.ts</code></a> (the <code>createEmptyBlockCoalescer</code>
+coordinator the main loop drives).</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="key-exports">Key exports<a href="#key-exports" class="hash-link" aria-label="Direct link to Key exports" title="Direct link to Key exports" translate="no">​</a></h2>
 <ul>
 <li class=""><code>init()</code> - <code>Operation&lt;void&gt;</code>. One-shot setup: OpenTelemetry, config validation, version pinning. Call before <code>start</code>.</li>
@@ -89,6 +123,6 @@ are full working <code>init()</code> + <code>start()</code> examples. The simple
 <ul>
 <li class="">Docs: <a href="https://effectstream.github.io/docs/packages/node/runtime" target="_blank" rel="noopener noreferrer" class="">https://effectstream.github.io/docs/packages/node/runtime</a></li>
 <li class="">Source: <a href="https://github.com/effectstream/effectstream/tree/main/packages/node-sdk/runtime" target="_blank" rel="noopener noreferrer" class="">https://github.com/effectstream/effectstream/tree/main/packages/node-sdk/runtime</a></li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/effectstream/effectstream/tree/main/docs/site/docs/home/500-packages/520-node/runtime.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/home/packages/node/node-sdk"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">node-sdk</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/home/packages/node/sm"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">sm</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#install" class="table-of-contents__link toc-highlight">Install</a></li><li><a href="#standalone-usage" class="table-of-contents__link toc-highlight">Standalone usage</a></li><li><a href="#inside-effectstream" class="table-of-contents__link toc-highlight">Inside EffectStream</a></li><li><a href="#key-exports" class="table-of-contents__link toc-highlight">Key exports</a></li><li><a href="#examples" class="table-of-contents__link toc-highlight">Examples</a></li><li><a href="#links" class="table-of-contents__link toc-highlight">Links</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/effectstream/effectstream/tree/main/docs/site/docs/home/500-packages/520-node/runtime.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/home/packages/node/node-sdk"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">node-sdk</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/home/packages/node/sm"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">sm</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#install" class="table-of-contents__link toc-highlight">Install</a></li><li><a href="#standalone-usage" class="table-of-contents__link toc-highlight">Standalone usage</a></li><li><a href="#inside-effectstream" class="table-of-contents__link toc-highlight">Inside EffectStream</a></li><li><a href="#empty-block-coalescing-catch-up" class="table-of-contents__link toc-highlight">Empty-block coalescing (catch-up)</a></li><li><a href="#key-exports" class="table-of-contents__link toc-highlight">Key exports</a></li><li><a href="#examples" class="table-of-contents__link toc-highlight">Examples</a></li><li><a href="#links" class="table-of-contents__link toc-highlight">Links</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Midnight Foundation. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>
